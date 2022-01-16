@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% load static %}
+
+<div class="section my-5">
+    <div class="container">
+        <div class="title">
+            <h1> About Us</h1>
+        </div>
+        <div class="content">
+            <div class="article">
+                <h3>Hamro Biruwa is one of the best agriculture website.
+                    that provide valuable agriculture<br> information and a
+                    personalized crop calendar for your farm.This farm
+                    app leverages <br> the combination of technology and experience to provide crop
+                    information which <br> improves the crop yield for each farmer. The app is available in 8 local
+                    languages.<br></h3>
+                <p>Their personal Advisory covers Land preparation,
+                    Seed treatment, Crop sowing,<br> Crop planning, Fertilizer calculator and crop
+                    nutrition, Pest and disease mangement,<br>Irrigation,Weed treatment and Harvesting.Their personal
+                    Advisory covers Land preparation,
+                    Seed treatment, Crop sowing,<br> Crop planning, Fertilizer calculator and crop
+                    nutrition, Pest and disease mangement,<br>Irrigation,Weed treatment and Harvesting.</p>
+            </div>
+        </div>
+        <div class="image-section">
+            <img src="{% static 'Images/about-img.jpeg' %}">
+        </div>
+        <div class="social">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+        </div>
+    </div>
+</div>
+
+{% endblock  %}

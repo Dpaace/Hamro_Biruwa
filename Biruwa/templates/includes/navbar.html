@@ -1,0 +1,51 @@
+{% load static %}
+<!-- NAVIGATION -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white py-3 fixed-top">
+    <div class="container">
+        <a href="{% url 'home' %}"><img src="{% static 'Images/LOGO.png'%}" alt="Hamro Biruwa" class="logo"></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span><i id="bar" class="fas fa-bars"></i></span>
+        </button>
+        <div class="collapse navbar-collapse w-100" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a {% if '/' == request.path %} class="nav-link active" {% else %} class="nav-link" {% endif %}
+                        href="{% url 'home' %}">
+                        Home
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a {% if 'product' == request.path %} class="nav-link active" {% else %} class="nav-link"
+                        {% endif %} href="{% url 'product' %}">Shop</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Discussion</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Blog</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Gallery</a>
+                </li>
+                <li class="nav-item">
+                    <a {% if 'contact' == request.path %} class="nav-link active" {% else %} class="nav-link"
+                        {% endif %} href="{% url 'contact' %}">
+                        Contact Us
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a {% if 'about' == request.path %} class="nav-link active" {% else %} class="nav-link" {% endif %}
+                        href="{% url 'about' %}">
+                        About Us
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <input type="text" name="" id="">
+                    <i class="fal fa-search"></i>
+                    <i class="fas fa-shopping-cart"></i>
+                    <a href="login/"><i class="far fa-user"></i></a>
+                </li>
+        </div>
+    </div>
+</nav>
