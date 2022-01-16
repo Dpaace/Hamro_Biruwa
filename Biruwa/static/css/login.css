@@ -8,28 +8,51 @@
 
 .container{
   border-radius: 25px;
-  background: #73AD21;
+  /* background: #73AD21; */
   padding: 20px;
   width: 200px;
   height: 380px;
 } 
 
-.bg-img{
-  background: url("Images/login.jpg");
+/* .bg-img{
+  background: url("/static/Images/login.jpg");
   height: 100vh;
   background-size: cover;
   background-position: center;
+  
 }
 
-.bg-img:after{
+.bg-img::before{
   position: absolute;
   content: '';
   top: 0;
   left: 0;
   height: 100%;
   width: 100%;
-  background: rgba(0,0,0,0.7);
+  opacity: 0.5;
+} */
+
+.bg-img {
+  position: relative; 
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
+
+.bg-img::before {    
+    content: "";
+    background-image: url("/static/Images/login.jpg");
+    background-size: cover;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    opacity: 0.9;
+}
+
 
 .container{
   position: absolute;
@@ -40,8 +63,8 @@
   padding: 60px 32px;
   width: 500px;
   transform: translate(-50%,-50%);
-  background: rgba(255,255,255,0.04);
-  box-shadow: -1px 4px 28px 0px rgba(0,0,0,0.75);
+  background: rgba(0, 0, 0, 0.4);
+  box-shadow: -1px 4px 28px 0px rgba(0,0,0,1);
 }
 
 .container header{
