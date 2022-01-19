@@ -79,9 +79,9 @@ WSGI_APPLICATION = 'Biruwa.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'hamro_biruwa_db',
+        'NAME': 'biruwa_db',
         'USER': 'postgres',
-        'PASSWORD': 'IRONman@123',
+        'PASSWORD': 'root7',
         'HOST': 'localhost',
     }
 }
@@ -134,3 +134,6 @@ MEDIA_URL = '/media/'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+AUTH_USER_MODEL = 'Hamro.AuthUser'
+
