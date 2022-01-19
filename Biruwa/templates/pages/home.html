@@ -68,58 +68,18 @@
             <p>Here you can check out our new products with fair price</p>
         </div>
         <div class="row mx-auto container-fluid">
+            {% for fproduct in featured_product %}
             <div class="product text-center col-lg-3 col-md-4 col-12">
-                <img class="img-fluid mb-3" src="/static/Images/Product/apple.png" alt="">
-                <div class="star">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                </div>
-                <h5 class="p-name">Apple Seeds</h5>
-                <h4 class="p-price">Rs 100</h4>
+                <a href="{% url 'product_detail' fproduct.id %}">
+                    <img class="img-fluid mb-3" src="{{ fproduct.product_photo.url}}" alt="">
+                </a>
+                <a href="{% url 'product_detail' fproduct.id %}">
+                    <h5 class="p-name">{{ fproduct.product_title }}</h5>
+                </a>
+                <h4 class="p-price">Rs {{ fproduct.price }}</h4>
                 <button class="buy-btn">Buy Now</button>
             </div>
-            <div class="product text-center col-lg-3 col-md-4 col-12">
-                <img class="img-fluid mb-3" src="/static/Images/Product/orange.png" alt="">
-                <div class="star">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                </div>
-                <h5 class="p-name">Orange Seeds</h5>
-                <h4 class="p-price">Rs 100</h4>
-                <button class="buy-btn">Buy Now</button>
-            </div>
-            <div class="product text-center col-lg-3 col-md-4 col-12">
-                <img class="img-fluid mb-3" src="/static/Images/Product/avocado.png" alt="">
-                <div class="star">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                </div>
-                <h5 class="p-name">Avocado Seeds</h5>
-                <h4 class="p-price">Rs 100</h4>
-                <button class="buy-btn">Buy Now</button>
-            </div>
-            <div class="product text-center col-lg-3 col-md-4 col-12">
-                <img class="img-fluid mb-3" src="/static/Images/Product/mango.png" alt="">
-                <div class="star">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                </div>
-                <h5 class="p-name">Mango Seeds</h5>
-                <h4 class="p-price">Rs 100</h4>
-                <button class="buy-btn">Buy Now</button>
-            </div>
+            {% endfor %}
         </div>
     </section>
     <!-- BANNER -->
