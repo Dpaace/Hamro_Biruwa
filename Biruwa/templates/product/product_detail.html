@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% load static %}
+
+<section class="container sproduct my-5 pt-5">
+    <div class="row mt-5">
+        <div class="col-lg-5 col-md-12 col-12">
+            <img class="img-fluid w-100 pb-1" id="MainImg" src="{{ single_product.product_photo.url }}" alt="Main Image">
+            <div class="small-img-group">
+                {% if single_product.product_photo_1 %}
+                <div class="small-img-col">
+                    <img src="{{ single_product.product_photo_1.url }}" width="100%" class="small-img" alt="Image 1">
+                </div>
+                {% endif %}
+                {% if single_product.product_photo_2 %}
+                <div class="small-img-col">
+                    <img src="{{ single_product.product_photo_2.url }}" width="100%" class="small-img" alt="Image 2">
+                </div>
+                {% endif %}
+                {% if single_product.product_photo_3 %}
+                <div class="small-img-col">
+                    <img src="{{ single_product.product_photo_3.url }}" width="100%" class="small-img" alt="Image 3">
+                </div>
+                {% endif %}
+                {% if single_product.product_photo_4 %}
+                <div class="small-img-col">
+                    <img src="{{ single_product.product_photo_4.url }}" width="100%" class="small-img" alt="Image 4">
+                </div>
+                {% endif %}
+                    </div>
+        </div>
+        <div class="col-lg-6 col-md-12 col-12">
+            <h6><a href="{% url 'home' %}">Home</a> / Seeds</h6>
+            <h3 class="py-4">{{ single_product.product_title }}</h3>
+            <h2>Rs {{ single_product.price }}</h2>
+            <h5>Enter Quantity</h5>
+            <input type="number" value="1" min="1" style="width: 7em">
+            <button class="buy-btn">Add To Cart</button>
+            <button class="buy-btn">Buy Now</button>
+            <h4 class="mt-5 mb-5">Product Description</h4>
+            <span>{{ single_product.description | safe }}description
+            </span>
+        </div>
+    </div>
+</section>
+
+
+
+{% endblock %}

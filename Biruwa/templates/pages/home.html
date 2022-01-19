@@ -1,0 +1,156 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% load static %}
+    
+    <!-- HOME -->
+    <section id="slider">
+        <ul class="slider-carousel" id="slider-carouesel">
+            <li class="img1"></li>
+            <li class="img2"></li>
+            <li class="img3"></li>
+            <li class="img4"></li>
+        </ul>
+    </section>
+    <!-- <section id="home">
+        <div class="container">
+            <h5>NEW ARRIVALS</h5>
+            <h1><span>Best Price</span> This Year</h1>
+            <p>Hello everyone this is the killer project <br>
+                Welcome to my world</p>
+            <button>Shop Now</button>
+        </div>
+    </section> -->
+    <!-- BRAND -->
+    <section id="brand" class="container">
+        <div class="row m-0 py-5">
+            <img class="img-fluid col-lg-2 col-md-4 col-6" src="/static/Images/Brand/adidas.jpg" alt="Adidas">
+            <img class="img-fluid col-lg-2 col-md-4 col-6" src="/static/Images/Brand/adidas.jpg" alt="Adidas">
+            <img class="img-fluid col-lg-2 col-md-4 col-6" src="/static/Images/Brand/adidas.jpg" alt="Adidas">
+            <img class="img-fluid col-lg-2 col-md-4 col-6" src="/static/Images/Brand/adidas.jpg" alt="Adidas">
+            <img class="img-fluid col-lg-2 col-md-4 col-6" src="/static/Images/Brand/adidas.jpg" alt="Adidas">
+            <img class="img-fluid col-lg-2 col-md-4 col-6" src="/static/Images/Brand/adidas.jpg" alt="Adidas">
+
+        </div>
+    </section>
+    <!-- CATEGORY -->
+    <section id="new" class="w-100">
+        <div class="row p-0 m-0 ">
+            <div class="one col-lg-4 col-md-12 col-12 p-0">
+                <img class="img-fluid" src="/static/Images/seeds.jpeg" alt="">
+                <div class="details">
+                    <h2>Seeds All Over</h2>
+                    <button class="text-uppercase">Shop Now</button>
+                </div>
+            </div>
+            <div class="one col-lg-4 col-md-12 col-12 p-0">
+                <img class="img-fluid" src="/static/Images/seedling.jpeg" alt="">
+                <div class="details">
+                    <h2>Ready to Plant</h2>
+                    <button class="text-uppercase">Shop Now</button>
+                </div>
+            </div>
+            <div class="one col-lg-4 col-md-12 col-12 p-0">
+                <img class="img-fluid" src="/static/Images/tools.jpeg" alt="">
+                <div class="details">
+                    <h2>The Needed Power</h2>
+                    <button class="text-uppercase">Shop Now</button>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- FEATURED -->
+    <section id="featured" class="my-5 pb-5">
+        <div class="container text-center mt-5 py-5">
+            <h3>Our Featured</h3>
+            <hr class="mx-auto">
+            <p>Here you can check out our new products with fair price</p>
+        </div>
+        <div class="row mx-auto container-fluid">
+            {% for fproduct in featured_product %}
+            <div class="product text-center col-lg-3 col-md-4 col-12">
+                <a href="{% url 'product_detail' fproduct.id %}">
+                    <img class="img-fluid mb-3" src="{{ fproduct.product_photo.url}}" alt="">
+                </a>
+                <a href="{% url 'product_detail' fproduct.id %}">
+                    <h5 class="p-name">{{ fproduct.product_title }}</h5>
+                </a>
+                <h4 class="p-price">Rs {{ fproduct.price }}</h4>
+                <button class="buy-btn">Buy Now</button>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+    <!-- BANNER -->
+    <section id="banner" class="my-5 py-5">
+        <div class="container">
+            <h4>MID SEASON'S SALE</h4>
+            <h1>Autumn Collection<br>UP TP 20% OFF</h1>
+            <button class="text-uppercase">Shop Now</button>
+        </div>
+    </section>
+    <!-- SEEDS -->
+    <section id="seeds" class="my-5 pb-5">
+        <div class="container text-center mt-5 py-5">
+            <h3>Our Seeds</h3>
+            <hr class="mx-auto">
+            <p>Here you can check out our new seeds with fair price</p>
+        </div>
+        <div class="row mx-auto container-fluid">
+            <div class="product text-center col-lg-3 col-md-4 col-12">
+                <img class="img-fluid mb-3" src="/static/Images/Seeds/1.jpeg" alt="">
+                <div class="star">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+                <h5 class="p-name">Apple Seeds</h5>
+                <h4 class="p-price">Rs 100</h4>
+                <button class="buy-btn">Buy Now</button>
+            </div>
+            <div class="product text-center col-lg-3 col-md-4 col-12">
+                <img class="img-fluid mb-3" src="/static/Images/Seeds/2.jpeg" alt="">
+                <div class="star">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+                <h5 class="p-name">Orange Seeds</h5>
+                <h4 class="p-price">Rs 100</h4>
+                <button class="buy-btn">Buy Now</button>
+            </div>
+            <div class="product text-center col-lg-3 col-md-4 col-12">
+                <img class="img-fluid mb-3" src="/static/Images/Seeds/3.jpeg" alt="">
+                <div class="star">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+                <h5 class="p-name">Avocado Seeds</h5>
+                <h4 class="p-price">Rs 100</h4>
+                <button class="buy-btn">Buy Now</button>
+            </div>
+            <div class="product text-center col-lg-3 col-md-4 col-12">
+                <img class="img-fluid mb-3" src="/static/Images/Seeds/4.jpeg" alt="">
+                <div class="star">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+                <h5 class="p-name">Mango Seeds</h5>
+                <h4 class="p-price">Rs 100</h4>
+                <button class="buy-btn">Buy Now</button>
+            </div>
+        </div>
+    </section>
+    
+{% endblock %} 

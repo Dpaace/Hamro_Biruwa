@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% load static %}
+
+<!-- FEATURED -->
+<section id="featured" class="my-5 py-5">
+    <div class="container mt-5 py-5">
+        <h2 class="font-weight-bold">Our Featured</h2>
+        <hr>
+        <p>Here you can check out our new products with fair price</p>
+    </div>
+    <div class="row mx-auto container">
+      {% for prod in product %}
+        <div class="product text-center col-lg-3 col-md-4 col-12">
+            <a href="{% url 'product_detail' prod.id %}">
+              <img class="img-fluid mb-3" src="{{ prod.product_photo.url }}" alt="">
+            </a>
+            <a href="{% url 'product_detail' prod.id %}">
+              <h5 class="p-name">{{ prod.product_title }}</h5>
+            </a>
+            <h4 class="p-price">Rs {{ prod.price }}</h4>
+            <button class="buy-btn">Buy Now</button>
+        </div>
+      {% endfor %}
+
+      <!-- PAGINATION STARTS -->
+      <nav aria-label="..." class="container pt-5">
+        {% if product.has_other_pages %}
+          <ul class="pagination">
+              {% if product.has_previous %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ product.previous_page_number }}"><i class="fa fa-angle-left"></i></a>
+                </li>
+              {% else %}
+                <li class="page-item disabled">
+                    <a class="page-link"><i class="fas fa-angle-left"></i></a>
+                </li>
+              {% endif %}
+
+              {% for i in product.paginator.page_range %}
+                {% if product.number == i %}
+                  <li class="page-item active"><a class="page-link" href="#">{{i}}</a></li>
+                {% else %}
+                  <li class="page-item"><a class="page-link" href="?page={{i}}">{{i}}</a></li>
+                {% endif %}
+              {% endfor %}
+
+              {% if product.has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ product.next_page_number }}"><i class="fa fa-angle-right"></i></a>
+                </li>
+              {% else %}
+                <li class="page-item disabled">
+                    <a class="page-link"><i class="fas fa-angle-right"></i></a>
+                </li>
+              {% endif %}
+          </ul>
+          {% endif %}
+      </nav>
+      <!-- PAGINATINO ENDS -->
+    </div>
+    
+        
+      
+</section>
+
+{% endblock %}
+
