@@ -71,6 +71,7 @@ def login(request):
     else:  
         return render(request, 'pages/login.html')   
 
+
 def about(request):
     return render(request, 'pages/about.html')
 
