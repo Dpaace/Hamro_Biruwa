@@ -12,8 +12,18 @@ User = get_user_model()
 
 #Create your views here.
 
+
+from product.models import Product
+
+# Create your views here.
+
+
 def home(request):
-    return render(request, 'pages/home.html')
+    featured_product = Product.objects.order_by('-created_date').filter(is_featured=True)
+    data = {
+        'featured_product': featured_product,
+    }
+    return render(request, 'pages/home.html', data)
 
 def homepage(request):
     return render(request, 'pages/homepage.html')
