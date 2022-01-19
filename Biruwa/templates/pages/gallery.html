@@ -3,6 +3,43 @@
 {% block content %}
 {% load static %}
 
-<h1>This is gallery part</h1>
+<div class="container gallery-container mt-5 py-5">
+    <h1 style="text-align: center">Our Gallery</h1>
+
+    <div class="tz-gallery">
+      <div class="row">
+        <div class="col-lg-4 col-md-6 col-12">
+          <a class="lightbox" href="{% static 'Images/back.png'%}">
+            <img src="{% static 'Images/back.png'%}" alt="photo" />
+          </a>
+        </div>
+        <div class="col-lg-4 col-md-6 col-12">
+          <a class="lightbox" href="{% static 'Images/LOGO.png'%}">
+            <img src="{% static 'Images/LOGO.png'%}" alt="Photo" />
+          </a>
+        </div>
+        <div class="col-lg-4 col-md-6 col-12">
+          <a class="lightbox" href="{% static 'Images/LOGO.png'%}">
+            <img src="{% static 'Images/LOGO.png'%}" alt="photo" />
+          </a>
+        </div>
+        <div class="col-lg-4 col-md-6 col-12">
+          <a class="lightbox" href="{% static 'Images/LOGO.png'%}">
+            <img src="{% static 'Images/LOGO.png'%}" alt="photo" />
+          </a>
+        </div>
+        <div class="col-lg-4 col-md-6 col-12">
+          <a class="lightbox" href="{% static 'Images/LOGO.png'%}">
+            <img src="{% static 'Images/LOGO.png'%}" alt="photo" />
+          </a>
+        </div>
+        <div class="col-lg-4 col-md-6 col-12">
+          <a class="lightbox" href="{% static 'Images/LOGO.png'%}">
+            <img src="{% static 'Images/LOGO.png'%}" alt="photo" />
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
 
 {% endblock  %} 
