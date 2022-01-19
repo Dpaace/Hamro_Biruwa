@@ -12,12 +12,12 @@ User = get_user_model()
 
 #Create your views here.
 
-<<<<<<< HEAD
+
 from product.models import Product
 
 # Create your views here.
-=======
->>>>>>> 3e3fafed12d45bb3468b32ddf452d85d8cb44e7f
+
+
 def home(request):
     featured_product = Product.objects.order_by('-created_date').filter(is_featured=True)
     data = {
