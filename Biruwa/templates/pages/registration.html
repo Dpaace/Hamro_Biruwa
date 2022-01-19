@@ -1,12 +1,65 @@
+{% load static %} 
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reg</title>
+    <title>Registration</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
 </head>
 <body>
-    <h1>Hello World</h1>
+    <div class="container">    
+        <div class="title">Sign Up to <b><span style="color: green;">Hamro Biruwa</span></b> </div>
+        <div class="row">
+
+            <form method="POST" enctype="multipart/form-data" action="{% url 'Hamro:register' %}">
+            {% csrf_token %} 
+            <!-- <div class="col"> -->
+                    <div class="user-details">
+                        <div class="input-box">
+                            <span class="details">User Name</span>
+                            <input type="text" placeholder="Enter your Username" required name="username" id="">
+                        </div>
+                        <div class="input-box">
+                            <span class="details">First Name</span>
+                            <input type="text" placeholder="Enter your First Name" required name="first_name" id="">
+                        </div>
+                        <div class="input-box">
+                            <span class="details">Last Name</span>
+                            <input type="text" placeholder="Enter your Last Name" required name="last_name" id="">
+                        </div>
+                        <div class="input-box">
+                            <span class="details">Phone Number</span>
+                            <input type="text" placeholder="Enter your Phone Number" required name="phone_number" id="">
+                        </div>
+                        <div class="input-box">
+                            <span class="details">Email Address</span>
+                            <input type="text" placeholder="Enter your email" required name="email" id="">
+                        </div>
+                        <div class="input-box">
+                            <span class="details">Password</span>
+                            <input type="password" placeholder="Enter your password" required name="password" id="">
+                        </div>
+                        <div class="input-box">
+                            <span class="details">Confirm Password</span>
+                            <input type="password" placeholder="Confirm your password" required name="confirm_password" id="">
+                        </div>
+                    </div>
+                    <div class="terms">
+                        <input type="checkbox" name="terms" id="check-1">
+                        <span class="check-tick">Creating an account means you're okay with our Terms and Service, Privacy Policy and our Default settings</span>
+                        <div class="button">
+                            <input type="submit">
+                            <button hidden type="submit" value="Register">Register</button>
+                            </input>
+                            <span>Already Have an account? <a href="/login/">Log In</a></span>
+                    </div>
+            </form>
+            </div>
+          <!-- </div> -->
+        
+    </div>
 </body>
 </html>
