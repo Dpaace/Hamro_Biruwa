@@ -1,8 +1,10 @@
 {% load static %}
 <!-- NAVIGATION -->
 <nav class="navbar navbar-expand-lg navbar-light bg-white py-3 fixed-top">
-    <div class="container">
-        <a href="{% url 'home' %}"><img src="{% static 'Images/LOGO.png'%}" alt="Hamro Biruwa" class="logo"></a>
+
+    <div class="container-fluid">
+        <a href="{% url 'Hamro:home' %}"><img src="{% static 'Images/LOGO.png'%}" alt="Hamro Biruwa" class="logo"></a>
+
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span><i id="bar" class="fas fa-bars"></i></span>
@@ -11,7 +13,7 @@
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
                     <a {% if '/' == request.path %} class="nav-link active" {% else %} class="nav-link" {% endif %}
-                        href="{% url 'home' %}">
+                        href="{% url 'Hamro:home' %}">
                         Home
                     </a>
                 </li>
@@ -26,17 +28,17 @@
                     <a class="nav-link" href="#">Blog</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Gallery</a>
+                    <a class="nav-link" href="{% url 'Hamro:gallery' %}">Gallery</a>
                 </li>
                 <li class="nav-item">
                     <a {% if 'contact' == request.path %} class="nav-link active" {% else %} class="nav-link"
-                        {% endif %} href="{% url 'contact' %}">
+                        {% endif %} href="{% url 'Hamro:contact' %}">
                         Contact Us
                     </a>
                 </li>
                 <li class="nav-item">
                     <a {% if 'about' == request.path %} class="nav-link active" {% else %} class="nav-link" {% endif %}
-                        href="{% url 'about' %}">
+                        href="{% url 'Hamro:about' %}">
                         About Us
                     </a>
                 </li>
