@@ -2,7 +2,67 @@
 
 {% block content %}
 
-<h2>Hello World</h2>
+{% load static %}
+<div class="img-content"></div>
+<section class="contact">
+    <div class="content">
+        <p>Hamro Biruwa</p>
+        <hr style="border-width: 1px; border-color: black;">
+        <h2>Contact Us</h2>
+    </div>
+    <div class="container">
+        <div class="contactinfo">
+            <h1>Get In Touch With Us</h1>
+            <div class="box">
+                <div class="icon"><i class="fa fa-map-marker" aria-hidden="true"></i></div>
+                <div class="text">
+                    <h3>Address</h3>
+                    <p>Softwarica College, Dillibazar </p>
+                </div>
+            </div>
 
-<!-- Sub Banner end -->
+            <div class="box">
+                <div class="icon"><i class="fa fa-phone" aria-hidden="true"></i></div>
+                <div class="text">
+                    <h3>Phone</h3>
+                    <p>+977 9841154296, 01-123456</p>
+                </div>
+            </div>
+
+            <div class="box">
+                <div class="icon"><i class="fa fa-envelope-o" aria-hidden="true"></i></div>
+                <div class="text">
+                    <h3>Email</h3>
+                    <p>hamrobiruwa@gmail.com</p>
+                </div>
+            </div>
+        </div>
+        <div class="contactform">
+            <form action="">
+                <h2>Send Message</h2>
+                <div class="inputbox">
+                    <input type="text" name="" required="required">
+                    <span>Full Name</span>
+                </div>
+
+                <div class="inputbox">
+                    <input type="text" name="" required="required">
+                    <span>Email</span>
+                </div>
+
+                <div class="inputbox">
+                    <input type="text" name="" required="required">
+                    <span>Type your Message</span>
+                    
+                </div>
+
+                <div class="inputbox">
+                    <input type="submit" name="" value="Send">
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+
+
 {% endblock  %}
