@@ -8,36 +8,13 @@
 
     <div class="tz-gallery">
       <div class="row">
+        {% for gl in gallery %}
         <div class="col-lg-4 col-md-6 col-12">
-          <a class="lightbox" href="{% static 'Images/back.png'%}">
-            <img src="{% static 'Images/back.png'%}" alt="photo" />
+          <a class="lightbox" href="{{gl.photo.url}}">
+            <img src="{{ gl.photo.url}}" alt="photo" />
           </a>
         </div>
-        <div class="col-lg-4 col-md-6 col-12">
-          <a class="lightbox" href="{% static 'Images/LOGO.png'%}">
-            <img src="{% static 'Images/LOGO.png'%}" alt="Photo" />
-          </a>
-        </div>
-        <div class="col-lg-4 col-md-6 col-12">
-          <a class="lightbox" href="{% static 'Images/LOGO.png'%}">
-            <img src="{% static 'Images/LOGO.png'%}" alt="photo" />
-          </a>
-        </div>
-        <div class="col-lg-4 col-md-6 col-12">
-          <a class="lightbox" href="{% static 'Images/LOGO.png'%}">
-            <img src="{% static 'Images/LOGO.png'%}" alt="photo" />
-          </a>
-        </div>
-        <div class="col-lg-4 col-md-6 col-12">
-          <a class="lightbox" href="{% static 'Images/LOGO.png'%}">
-            <img src="{% static 'Images/LOGO.png'%}" alt="photo" />
-          </a>
-        </div>
-        <div class="col-lg-4 col-md-6 col-12">
-          <a class="lightbox" href="{% static 'Images/LOGO.png'%}">
-            <img src="{% static 'Images/LOGO.png'%}" alt="photo" />
-          </a>
-        </div>
+        {% endfor %}
       </div>
     </div>
   </div>
