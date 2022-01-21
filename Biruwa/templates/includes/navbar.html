@@ -30,6 +30,10 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'Hamro:gallery' %}">Gallery</a>
                 </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'Hamro:news' %}">News</a>
+                </li>
                 <li class="nav-item">
                     <a {% if 'contact' == request.path %} class="nav-link active" {% else %} class="nav-link"
                         {% endif %} href="{% url 'Hamro:contact' %}">
@@ -46,7 +50,7 @@
                     <input type="text" name="" id="">
                     <i class="fal fa-search"></i>
                     <i class="fas fa-shopping-cart"></i>
-                    <a href="login/"><i class="far fa-user"></i></a>
+                    <a href="{% url 'Hamro:login' %}"><i class="far fa-user"></i></a>
                 </li>
         </div>
     </div>
