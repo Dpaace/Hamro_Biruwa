@@ -4,7 +4,7 @@ from django.urls.conf import include
 from django.contrib import messages
 from django.contrib.auth import  authenticate , get_user_model , logout
 from django.contrib.auth.models import auth, User
-from Hamro.models import Gallery
+from Hamro.models import Gallery, News
 
 from Hamro.forms import UserResgistrationForm
 from Hamro.models import AuthUser
@@ -85,3 +85,11 @@ def gallery(request):
         'gallery': gallery,
     }
     return render(request, 'pages/gallery.html', data)
+
+def news(request):
+    news = News.objects.all()
+    data = {
+        'news': news,
+    }
+    return render(request, 'pages/news.html', data)
+

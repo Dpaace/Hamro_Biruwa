@@ -1,0 +1,52 @@
+{% extends 'base.html' %} {% block content %} {% load static %}
+
+<section class="services">
+    <div class="container">
+        <div class="row">
+            <!-- <div class="section-title">
+              <h1>News</h1>
+           </div> -->
+        </div>
+        <div class="row">
+            <div class="service-items">
+                <div class="row">
+                    <!-- Items start -->
+                    {% for new in news %}
+                    <div class="item">
+                        <div class="item-inner">
+                            <h3>{{ new.news_title }}</h3>
+                            <p>
+                                {{ new.description | safe }}
+                            </p>
+                            <div class="read-more-cont">
+                                <p>
+                                    {{ new.description | safe }}
+                                </p>
+                            </div>
+                            <button class="btn" type="button">Read More</button>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    <!-- Items end -->
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- read more popup box start -->
+<div class="popup-box">
+    <div class="popup-content">
+        <div class="popup-header">
+            <h3></h3>
+            <span class="popup-close-icon">&times;</span>
+        </div>
+        <div class="popup-body"></div>
+        <div class="popup-footer">
+            <button class="btn popup-close-btn">Close</button>
+        </div>
+    </div>
+</div>
+<!-- read more popup box end -->
+
+{% endblock %}
