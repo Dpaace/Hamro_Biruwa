@@ -1,5 +1,5 @@
 from django.contrib import admin
-from Hamro.models import Gallery
+from Hamro.models import Gallery, News
 from django.utils.html import format_html
 
 from Hamro.models import AuthUser
@@ -18,3 +18,9 @@ class GalleryAdmin(admin.ModelAdmin):
     list_display_links = ('id', 'thumbnail')
 
 admin.site.register(Gallery, GalleryAdmin)
+
+class NewsAdmin(admin.ModelAdmin):
+
+    list_display = ('id', 'news_title')
+    list_display_links = ('id', 'news_title')
+admin.site.register(News, NewsAdmin)
