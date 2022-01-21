@@ -1,22 +1,25 @@
 {% extends 'base.html' %} {% block content %} {% load static %}
 
-<section class="services">
+<section class="services mt-5">
     <div class="container">
         <div class="row">
-            <!-- <div class="section-title">
-              <h1>News</h1>
-           </div> -->
+            <div class="section-title">
+                <h1>News</h1>
+            </div>
         </div>
         <div class="row">
             <div class="service-items">
                 <div class="row">
                     <!-- Items start -->
                     {% for new in news %}
-                    <div class="item">
+                    <div class="item  col-lg-3 col-md-4 col-12">
                         <div class="item-inner">
                             <h3>{{ new.news_title }}</h3>
+                            <h2>Released Date</h2>
+                            {{ new.created_date }}
+                            <hr>
                             <p>
-                                {{ new.description | safe }}
+                                {{ new.news_title_1 }}
                             </p>
                             <div class="read-more-cont">
                                 <p>
@@ -28,6 +31,43 @@
                     </div>
                     {% endfor %}
                     <!-- Items end -->
+                    <!-- PAGINATION STARTS -->
+                    <nav aria-label="..." class="container mx-5 pt-5">
+                        {% if news.has_other_pages %}
+                        <ul class="pagination">
+                            {% if news.has_previous %}
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{ news.previous_page_number }}"><i
+                                        class="fa fa-angle-left"></i></a>
+                            </li>
+                            {% else %}
+                            <li class="page-item disabled">
+                                <a class="page-link"><i class="fas fa-angle-left"></i></a>
+                            </li>
+                            {% endif %}
+
+                            {% for i in news.paginator.page_range %}
+                            {% if news.number == i %}
+                            <li class="page-item active"><a class="page-link" href="#">{{i}}</a></li>
+                            {% else %}
+                            <li class="page-item"><a class="page-link" href="?page={{i}}">{{i}}</a></li>
+                            {% endif %}
+                            {% endfor %}
+
+                            {% if news.has_next %}
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{ news.next_page_number }}"><i
+                                        class="fa fa-angle-right"></i></a>
+                            </li>
+                            {% else %}
+                            <li class="page-item disabled">
+                                <a class="page-link"><i class="fas fa-angle-right"></i></a>
+                            </li>
+                            {% endif %}
+                        </ul>
+                        {% endif %}
+                    </nav>
+                    <!-- PAGINATINO ENDS -->
                 </div>
             </div>
         </div>

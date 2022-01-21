@@ -20,7 +20,7 @@ class GalleryAdmin(admin.ModelAdmin):
 admin.site.register(Gallery, GalleryAdmin)
 
 class NewsAdmin(admin.ModelAdmin):
-
-    list_display = ('id', 'news_title')
+    list_display = ('id', 'news_title', 'news_title_1')
     list_display_links = ('id', 'news_title')
+    
 admin.site.register(News, NewsAdmin)

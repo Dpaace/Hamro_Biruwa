@@ -5,6 +5,7 @@ from django.contrib import messages
 from django.contrib.auth import  authenticate , get_user_model , logout
 from django.contrib.auth.models import auth, User
 from Hamro.models import Gallery, News
+from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 
 from Hamro.forms import UserResgistrationForm
 from Hamro.models import AuthUser
@@ -87,9 +88,12 @@ def gallery(request):
     return render(request, 'pages/gallery.html', data)
 
 def news(request):
-    news = News.objects.all()
+    news = News.objects.order_by('-created_date')
+    paginator = Paginator(news, 3)
+    page = request.GET.get('page')
+    paged_news = paginator.get_page(page)
     data = {
-        'news': news,
+        'news': paged_news,
     }
     return render(request, 'pages/news.html', data)
 
