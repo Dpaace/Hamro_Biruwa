@@ -22,3 +22,6 @@ def product_detail(request, id):
     }
 
     return render(request, 'product/product_detail.html', data)
+
+def cart(request):
+    return render(request, 'product/cart.html')
