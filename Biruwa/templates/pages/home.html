@@ -77,7 +77,10 @@
                     <h5 class="p-name">{{ fproduct.product_title }}</h5>
                 </a>
                 <h4 class="p-price">Rs {{ fproduct.price }}</h4>
-                <button class="buy-btn">Buy Now</button>
+                <a href="{% url 'add-to-cart' fproduct.id  %}">
+                    <button class="buy-btn">Add To Cart</button>
+                </a>
+                
             </div>
             {% endfor %}
         </div>
