@@ -39,3 +39,4 @@ var decrementQty = minusBtn.click(function() {
     }
     update_amounts();
 });
+

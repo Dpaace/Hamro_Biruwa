@@ -21,18 +21,23 @@
                   </tr>
                </thead>
                <tbody>
+                  {% for p in products %}
+                  {% if p %}
                   <tr>
                      <td>
                         <div class="product-img">
                            <div class="img-prdct">
-                              <img src="/static/Images/Product/apple.png">
+                              <img src="{{ p.product_photo.url }}">
                            </div>
                         </div>
                      </td>
                      <td>
-                        <p>Apple Seeds</p>
+                        <p>{{ p.product_title }}</p>
                         <br>
-                        <i class="fas fa-trash-alt"></i>
+                        <a href="{% url 'remove-from-cart' p.id  %}">
+                           <i class="fas fa-trash-alt"></i>
+                        </a>
+                        
                      </td>
                      <td>
                         <div class="button-container">
@@ -42,11 +47,16 @@
                         </div>
                      </td>
                      <td>
-                        <input type="text" value="72" class="price form-control" disabled>
+                        <input type="text" value="{{ p.price }}" class="price form-control" disabled>
                      </td>
                      <td>$ <span id="amount" class="amount">0</span>
                      </td>
                   </tr>
+                  {%else%}
+                  <br><br><br>
+                  <h1>no products</h1>
+                  {% endif %}
+                  {% endfor %}
 
 
 
