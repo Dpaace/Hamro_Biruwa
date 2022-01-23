@@ -4,7 +4,9 @@
 {% load static %}
 
 <section class="container sproduct my-5 pt-5">
+    
     <div class="row mt-5">
+        
         <div class="col-lg-5 col-md-12 col-12">
             <img class="img-fluid w-100 pb-1" id="MainImg" src="{{ single_product.product_photo.url }}" alt="Main Image">
             <div class="small-img-group">
@@ -36,13 +38,17 @@
             <h2>Rs {{ single_product.price }}</h2>
             <h5>Enter Quantity</h5>
             <input type="number" value="1" min="1" style="width: 7em">
-            <button class="buy-btn">Add To Cart</button>
+            <a href="{% url 'add-to-cart' single_product.id  %}">
+                <button class="buy-btn">Add To Cart</button>
+            </a>
             <button class="buy-btn">Buy Now</button>
             <h4 class="mt-5 mb-5">Product Description</h4>
             <span>{{ single_product.description | safe }}description
             </span>
         </div>
+        
     </div>
+    
 </section>
 
 
