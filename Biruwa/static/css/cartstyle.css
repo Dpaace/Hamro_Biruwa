@@ -1,0 +1,100 @@
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=Comforter+Brush&family=Lato&family=Open+Sans:wght@300;400;500;600;700&family=Poppins:wght@300;400;600;900&family=Roboto:wght@300&family=Work+Sans:wght@100&display=swap');
+
+i {
+    margin-right: 10px;
+}
+
+input:focus,
+button:focus,
+.form-control:focus{
+    outline: none;
+    box-shadow: none;
+}
+
+.form-control:disabled, .form-control[readonly]{
+    background-color: #fff;
+    border-radius: 0px;
+}
+
+
+.table tr,
+.table tr td{
+    vertical-align: middle;
+    font-size: 20px;
+}
+
+
+.button-container{
+    display: flex;
+    align-items: center;
+}
+
+.button-container .form-control{
+    max-width: 80px;
+    text-align: center;
+    display: inline-block;
+    margin: 0px 5px;
+    border-radius: 0px;
+}
+
+#myTable .form-control{
+    width: auto;
+    display: inline-block;
+}
+
+.cart-qty-plus,
+.cart-qty-minus{
+    width: 38px;
+    height: 38px;
+    background-color: #fff;
+    border: 1px solid #ced4da;
+}
+
+.cart-qty-plus:hover,
+.cart-qty-minus:hover{
+    background-color: #88BE4C;
+    color: black;
+}
+
+.img-prdct{
+    width: 50px;
+    height: 50px;
+    border-radius: 4px;
+}
+.img-prdct img{
+    width: 80%;
+}
+
+thead tr{
+    background-color: #88BE4C;
+    color: white;
+}
+
+.amount1{
+    margin-right: 50px;
+}
+
+.img-prdct{
+    width:150px ;
+    height:150px;
+}
+
+.cart-qty-plus{
+    background-color:#00a5e8;
+    color:white;
+    font-weight: 600;
+}
+
+.cart-qty-minus{
+    background-color:#00a5e8;
+    color:white;
+    font-weight: 600;
+}
+
+tbody td .fas{
+    cursor: pointer;
+}
+
+tbody td .fas:hover{
+    color: red;
+}

@@ -1,7 +1,9 @@
 import imp
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, redirect, render
+from . import models
 from .models import Product
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
+from django.contrib import messages, auth
 
 # Create your views here.
 def product(request):
@@ -22,3 +24,98 @@ def product_detail(request, id):
     }
 
     return render(request, 'product/product_detail.html', data)
+
+def cart(request):
+    return render(request, 'product/cart.html')
+
+def add_to_cart_view(request, pk):
+    products = models.Product.objects.all()
+
+    #for cart counter, fetching products ids added by customer from cookies
+    if 'product_ids' in request.COOKIES:
+        product_ids = request.COOKIES['product_ids']
+        counter=product_ids.split('|')
+        product_count_in_cart=len(set(counter))
+        
+    else:
+        product_count_in_cart=1
+
+    
+    response = render(request, 'product/product.html',{'products':products,'product_count_in_cart':product_count_in_cart})
+    
+    # adding product id to cookies
+    if 'product_ids' in request.COOKIES:
+        product_ids = request.COOKIES['product_ids']
+        product=models.Product.objects.get(id=pk)
+        if product_ids=="":
+            product_ids=str(pk)
+        else:
+            product_ids=product_ids+"|"+str(pk)
+            
+        response.set_cookie('product_ids', product_ids)
+        
+    else:
+        response.set_cookie('product_ids', pk)  
+        
+    
+    product=models.Product.objects.get(id=pk)
+    messages.success(request, product.product_title + ' added to cart successfully!')
+    return response
+    
+    
+
+# for checkout of cart
+def cart_view(request):
+    #for cart counter
+    if 'product_ids' in request.COOKIES:
+        product_ids = request.COOKIES['product_ids']
+        counter=product_ids.split('|')
+        product_count_in_cart=len(set(counter))
+    else:
+        product_count_in_cart=0
+    
+    # fetching product details from db whose id is present in cookie
+    products=None
+    total=0
+    if 'product_ids' in request.COOKIES:
+        product_ids = request.COOKIES['product_ids']
+        if product_ids != "":
+            product_id_in_cart=product_ids.split('|')
+            products=models.Product.objects.all().filter(id__in = product_id_in_cart)
+
+    
+    return render(request,'product/cart.html', {'products':products,'total':total,'product_count_in_cart':product_count_in_cart})
+
+def remove_from_cart_view(request,pk):
+    #for counter in cart
+    if 'product_ids' in request.COOKIES:
+        product_ids = request.COOKIES['product_ids']
+        counter=product_ids.split('|')
+        product_count_in_cart=len(set(counter))
+    else:
+        product_count_in_cart=0
+
+    # removing product id from cookie
+    total=0
+    if 'product_ids' in request.COOKIES:
+        product_ids = request.COOKIES['product_ids']
+        product_id_in_cart=product_ids.split('|')
+        product_id_in_cart=list(set(product_id_in_cart))
+        product_id_in_cart.remove(str(pk))
+        products=models.Product.objects.all().filter(id__in = product_id_in_cart)
+        #for total price shown in cart after removing product
+        # for p in products:
+        #     total=total+p.price
+
+        #  for update coookie value after removing product id in cart
+        value=""
+        for i in range(len(product_id_in_cart)):
+            if i==0:
+                value=value+product_id_in_cart[0]
+            else:
+                value=value+"|"+product_id_in_cart[i]
+        response = render(request, 'product/cart.html',{'products':products,'total':total,'product_count_in_cart':product_count_in_cart})
+        if value=="":
+            response.delete_cookie('product_ids')
+        response.set_cookie('product_ids',value)
+        return response

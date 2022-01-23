@@ -5,7 +5,10 @@ from django.contrib import messages
 from django.contrib.auth import  authenticate , get_user_model , logout
 from django.contrib.auth.models import auth, User
 from Hamro.models import Gallery, News
-
+from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
+from . import models
+from product import models
+# from product import models
 from Hamro.forms import UserResgistrationForm
 from Hamro.models import AuthUser
 
@@ -20,11 +23,12 @@ from product.models import Product
 
 
 def home(request):
+    # For showing featured Products
     featured_product = Product.objects.order_by('-created_date').filter(is_featured=True)
     data = {
         'featured_product': featured_product,
     }
-    return render(request, 'pages/home.html', data)
+    return render(request, 'pages/home.html',data)
 
 def homepage(request):
     return render(request, 'pages/homepage.html')
@@ -87,9 +91,12 @@ def gallery(request):
     return render(request, 'pages/gallery.html', data)
 
 def news(request):
-    news = News.objects.all()
+    news = News.objects.order_by('-created_date')
+    paginator = Paginator(news, 3)
+    page = request.GET.get('page')
+    paged_news = paginator.get_page(page)
     data = {
-        'news': news,
+        'news': paged_news,
     }
     return render(request, 'pages/news.html', data)
 
