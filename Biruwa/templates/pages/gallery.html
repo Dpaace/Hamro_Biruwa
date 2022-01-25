@@ -3,6 +3,20 @@
 {% block content %}
 {% load static %}
 
-<h1>This is gallery part</h1>
+<div class="container gallery-container mt-5 py-5">
+    <h1 style="text-align: center">Our Gallery</h1>
+
+    <div class="tz-gallery">
+      <div class="row">
+        {% for gl in gallery %}
+        <div class="col-lg-4 col-md-6 col-12">
+          <a class="lightbox" href="{{gl.photo.url}}">
+            <img src="{{ gl.photo.url}}" alt="photo" />
+          </a>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
 
 {% endblock  %} 
