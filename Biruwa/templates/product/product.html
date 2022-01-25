@@ -11,8 +11,9 @@
         <p>Here you can check out our new products with fair price</p>
     </div>
     <div class="row mx-auto container">
+      {% include 'includes/messages.html' %}
       {% for prod in product %}
-        <div class="product text-center col-lg-3 col-md-4 col-12">
+        <div class="product text-center">
             <a href="{% url 'product_detail' prod.id %}">
               <img class="img-fluid mb-3" src="{{ prod.product_photo.url }}" alt="">
             </a>
@@ -20,7 +21,10 @@
               <h5 class="p-name">{{ prod.product_title }}</h5>
             </a>
             <h4 class="p-price">Rs {{ prod.price }}</h4>
-            <button class="buy-btn">Buy Now</button>
+            <a href="{% url 'add-to-cart' prod.id  %}">
+              <button class="buy-btn">Add to Cart</button>
+            </a>
+            
         </div>
       {% endfor %}
 
@@ -58,12 +62,19 @@
           </ul>
           {% endif %}
       </nav>
-      <!-- PAGINATINO ENDS -->
+      <!-- PAGINATION ENDS -->
     </div>
     
         
       
 </section>
+<script>
+  {% if messages %}
+  {%for message in messages%}
+  alert('{{message}}');
+  {%endfor%}
+  {%endif%}
+</script>
 
 {% endblock %}
 
