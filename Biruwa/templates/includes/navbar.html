@@ -50,9 +50,37 @@
                     <input type="text" name="" id="">
                     <i class="fal fa-search"></i>
                     <a href="{% url 'cart' %}"><i class="fas fa-shopping-cart"></i></a>
-                    <a href="{% url 'Hamro:login' %}"><i class="far fa-user"></i></a>
                 </li>
+                {% if not request.user.is_authenticated  %}
+                <a href="{% url 'Hamro:login' %}"><i class="far fa-user"></i></a>
+                {% else %}
+                <div class="profile">
+                    <ul>
+                        <li class="nr_li dd_main" style="list-style: none;">
+                            <img src="{% static '/Images/user.png' %}" alt="profile_img">
+                            <div class="dd_menu">
+                                <div= class="dd_right">
+                                    <ul>
+                                        <li>{{ request.user.first_name}}</li>
+                                        <li><a href={% url 'Hamro:dashboard'%}>Dashboard</a></li>
+                                        <li><a href={% url 'Hamro:logout'%}>Signout</a></li>
+                                    </ul>
+                                </div=
+                            </div>
+                        </li>
+        
+                    </ul>
+                </div>
+                {% endif %}
         </div>
     </div>
+    <script>
+        var dd_main = document.querySelector(".dd_main");
+
+        dd_main.addEventListener("click", function () {
+            this.classList.toggle("active");
+        })
+    </script>
+
 </nav>
 
