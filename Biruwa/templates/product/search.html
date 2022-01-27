@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% load static %}
+<section id="featured" class="my-5 py-5">
+    <div class="container mt-5 py-5">
+        <h2 class="font-weight-bold">Items Found</h2>
+        <hr>
+    </div>
+    <div class="row mx-auto container">
+        {% for prod in product %}
+        <div class="product text-center">
+            <a href="{% url 'product_detail' prod.id %}">
+                <img class="img-fluid mb-3" src="{{ prod.product_photo.url }}" alt="">
+            </a>
+            <a href="{% url 'product_detail' prod.id %}">
+                <h5 class="p-name">{{ prod.product_title }}</h5>
+            </a>
+            <h4 class="p-price">Rs {{ prod.price }}</h4>
+            <a href="{% url 'add-to-cart' prod.id  %}">
+                <button class="buy-btn">Add to Cart</button>
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+{% endblock %}
