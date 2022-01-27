@@ -81,7 +81,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'biruwa_db',
         'USER': 'postgres',
-        'PASSWORD': '#Leshmania#406',
+        'PASSWORD': 'IRONman@123',
         'HOST': 'localhost',
     }
 }
