@@ -30,9 +30,6 @@ def home(request):
     }
     return render(request, 'pages/home.html',data)
 
-def homepage(request):
-    return render(request, 'pages/homepage.html')
-
 def register(request):
     form = UserResgistrationForm()
     if request.method =='POST':
@@ -68,7 +65,7 @@ def login(request):
 
         if user is not None:
             auth.login(request, user)
-            return redirect('Hamro:homepage')
+            return redirect('Hamro:home')
         
         else:
             messages.info(request, 'Invalid credentials')
@@ -100,3 +97,10 @@ def news(request):
     }
     return render(request, 'pages/news.html', data)
 
+
+def logout(request):
+    auth.logout(request)
+    return redirect('Hamro:home')
+
+def dashboard(request):
+    return render(request, 'pages/dashboard.html')

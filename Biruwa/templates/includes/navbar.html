@@ -1,58 +1,103 @@
 {% load static %}
 <!-- NAVIGATION -->
-<nav class="navbar navbar-expand-lg navbar-light bg-white py-3 fixed-top">
 
+<head>
+    <style>
+        input {
+            width: 250px;
+            border-radius: 5px;
+            margin-left: 50px;
+            text-align: center;
+        }
+    </style>
+</head>
+<nav class="navbar navbar-expand-lg navbar-light bg-white py-3 fixed-top">
     <div class="container-fluid">
         <a href="{% url 'Hamro:home' %}"><img src="{% static 'Images/LOGO.png'%}" alt="Hamro Biruwa" class="logo"></a>
+
+        <form action="{% url 'search' %}" class="search-header">
+            <input type="search" value="" placeholder="Search" name='keyword' />
+        </form>
 
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span><i id="bar" class="fas fa-bars"></i></span>
         </button>
         <div class="collapse navbar-collapse w-100" id="navbarSupportedContent">
-            <ul class="navbar-nav ml-auto">
+
+            <ul class="navbar-nav ml-auto pr-4">
                 <li class="nav-item">
-                    <a {% if '/' == request.path %} class="nav-link active" {% else %} class="nav-link" {% endif %}
-                        href="{% url 'Hamro:home' %}">
+                    <a class="nav-link" class="nav-link" href="{% url 'Hamro:home' %}">
                         Home
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a {% if 'product' == request.path %} class="nav-link active" {% else %} class="nav-link"
-                        {% endif %} href="{% url 'product' %}">Shop</a>
+                    <a class="nav-link" class="nav-link" href="{% url 'product' %}">
+                        Shop
+                    </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Discussion</a>
+                    <a class="nav-link" href="#">
+                        Discussion
+                    </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Blog</a>
+                    <a class="nav-link" href="#">
+                        Blog
+                    </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'Hamro:gallery' %}">Gallery</a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'Hamro:news' %}">News</a>
+                    <a class="nav-link" href="{% url 'Hamro:gallery' %}">
+                        Gallery
+                    </a>
                 </li>
                 <li class="nav-item">
-                    <a {% if 'contact' == request.path %} class="nav-link active" {% else %} class="nav-link"
-                        {% endif %} href="{% url 'Hamro:contact' %}">
+                    <a class="nav-link" href="{% url 'Hamro:news' %}">
+                        News
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" class="nav-link" href="{% url 'Hamro:contact' %}">
                         Contact Us
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a {% if 'about' == request.path %} class="nav-link active" {% else %} class="nav-link" {% endif %}
-                        href="{% url 'Hamro:about' %}">
+                    <a class="nav-link" class="nav-link" href="{% url 'Hamro:about' %}">
                         About Us
                     </a>
                 </li>
                 <li class="nav-item">
-                    <input type="text" name="" id="">
-                    <i class="fal fa-search"></i>
                     <a href="{% url 'cart' %}"><i class="fas fa-shopping-cart"></i></a>
-                    <a href="{% url 'Hamro:login' %}"><i class="far fa-user"></i></a>
                 </li>
+                {% if not request.user.is_authenticated %}
+                <a href="{% url 'Hamro:login' %}"><i class="far fa-user"></i></a>
+                {% else %}
+                <div class="profile">
+                    <ul>
+                        <li class="nr_li dd_main" style="list-style: none;">
+                            <!-- <img src="{% static '/Images/user.png' %}" alt="profile_img"> -->
+                            <i class="far fa-user-circle" style="color: black;"></i>
+                            <div class="dd_menu">
+                                <div= class="dd_right">
+                                    <ul>
+                                        <li>{{ request.user.first_name}}</li>
+                                        <li><a href={% url 'Hamro:dashboard' %}>Dashboard</a></li>
+                                        <li><a href={% url 'Hamro:logout' %}>Signout</a></li>
+                                    </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </ul>
         </div>
+        {% endif %}
     </div>
-</nav>
+    </div>
+    <script>
+        var dd_main = document.querySelector(".dd_main");
 
+        dd_main.addEventListener("click", function () {
+            this.classList.toggle("active");
+        })
+    </script>
+</nav>

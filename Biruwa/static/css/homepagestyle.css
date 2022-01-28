@@ -355,25 +355,25 @@ footer .copyright a:hover{
 
 /* SLIDER FUNCTION */
 .img1 {
-    background: url(/static/Images/Rome.jpg);
+    background: url(/static/Images/Slider/img1.jpg);
     background-size: 100% 100%;
     margin-top: 0;
 }
 
 .img2 {
-    background: url(/static/Images/Germany.jpg);
+    background: url(/static/Images/Slider/img2.jpg);
     background-size: 100% 100%;
     margin-top: 0;
 }
 
 .img3 {
-    background: url(/static/Images/Denmark.jpg);
+    background: url(/static/Images/Slider/img3.jpg);
     background-size: 100% 100%;
     margin-top: 0;
 }
 
 .img4 {
-    background: url(/static/Images/Bridge.jpg);
+    background: url(/static/Images/Slider/img4.jpg);
     background-size: 100% 100%;
     margin-top: 0;
 }
@@ -392,4 +392,61 @@ footer .copyright a:hover{
     text-align: center;
     margin-top: 0;
     padding: 0;
+}
+
+/* +++++++++++++++++++++++++++++ */
+
+.profile > ul{
+    display: flex;
+    align-items: center;
+}
+
+.profile ul li.nr_li{
+    cursor: pointer;
+    color: #fff;
+    font-size: 20px;
+    position: relative;
+}
+.profile ul li.nr_li:hover {
+    color: #cefffc;
+}
+
+.profile ul li img{
+    width: 35px;
+    vertical-align: middle;
+    
+}
+
+.dd_menu {
+    position: absolute;
+    right: -25px;
+    top: 47px;
+    display: flex;
+    background: #fff;
+    border-radius: 15px;
+    box-shadow: 0px 0px 3px rgba(0,0,0,0.25);
+    display: none;
+}
+
+.dd_menu .dd_right{
+    padding: 15px 20px;
+}
+
+.dd_menu li{
+    margin-bottom: 5px;
+    color: #868686;
+    list-style: none;
+}
+
+.dd_menu:before{
+    content: "";
+    position: absolute;
+    top: -20px;
+    right: 30px;
+    border: 10px solid;
+    border-color: transparent transparent #fff transparent;
+}
+
+.dd_main.active .dd_menu{
+    display: flex;
 }
