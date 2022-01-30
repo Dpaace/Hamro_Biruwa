@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% load static %}
+
+<section class="container sproduct my-5 pt-5">
+
+    <!-- <div class="row mt-5"> -->
+    <div class="row col-lg-12 col-md-12 col-12 justify-content-center">
+        <img class="img-fluid pb-5" id="MainImg" src="{{ single_blog.blog_photo.url }}" alt="Main Image">
+    </div>
+    <!-- </div> -->
+    <div class="col-lg-12 col-md-12 col-12">
+        <h6 class="row justify-content-center"><a href="{% url 'Hamro:home' %}"> Home </a>|Blogs</h6>
+        <h3 class="row justify-content-center py-4">{{ single_blog.blog_title }}</h3>
+
+        <h2 class="mt-5 mb-5">Description</h2>
+        <p>{{ single_blog.description | safe }}</p>
+    </div>
+
+    </div>
+
+</section>
+
+
+
+{% endblock %}
