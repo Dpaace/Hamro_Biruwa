@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% load static %}
+
+<!-- FEATURED -->
+<section id="featured" class="my-5 py-5">
+  <div class="container mt-5 py-5">
+    <h2 class="font-weight-bold">Our Blogs</h2>
+    <hr>
+    <p>Here you can check out our new blogs</p>
+  </div>
+  <div class="row mx-auto container">
+    {% for prod in blog %}
+    <div class="product text-center">
+      <a href="{% url 'Hamro:blog_detail' prod.id %}">
+        <img class="img-fluid mb-3" src="{{ prod.blog_photo.url }}" alt="">
+      </a>
+      <a href="{% url 'Hamro:blog_detail' prod.id %}">
+        <h5 class="p-name">{{ prod.blog_title }}</h5>
+      </a>
+      <a href="{% url 'Hamro:blog_detail' prod.id  %}">
+        <button class="buy-btn">Read More</button>
+      </a>
+
+    </div>
+    {% endfor %}
+
+    <!-- PAGINATION STARTS -->
+    <nav aria-label="..." class="container pt-5">
+      {% if blog.has_other_pages %}
+      <ul class="pagination">
+        {% if blog.has_previous %}
+        <li class="page-item">
+          <a class="page-link" href="?page={{ blog.previous_page_number }}"><i class="fa fa-angle-left"></i></a>
+        </li>
+        {% else %}
+        <li class="page-item disabled">
+          <a class="page-link"><i class="fas fa-angle-left"></i></a>
+        </li>
+        {% endif %}
+
+        {% for i in blog.paginator.page_range %}
+        {% if blog.number == i %}
+        <li class="page-item active"><a class="page-link" href="#">{{i}}</a></li>
+        {% else %}
+        <li class="page-item"><a class="page-link" href="?page={{i}}">{{i}}</a></li>
+        {% endif %}
+        {% endfor %}
+
+        {% if blog.has_next %}
+        <li class="page-item">
+          <a class="page-link" href="?page={{ blog.next_page_number }}"><i class="fa fa-angle-right"></i></a>
+        </li>
+        {% else %}
+        <li class="page-item disabled">
+          <a class="page-link"><i class="fas fa-angle-right"></i></a>
+        </li>
+        {% endif %}
+      </ul>
+      {% endif %}
+    </nav>
+    <!-- PAGINATION ENDS -->
+  </div>
+
+
+
+</section>
+
+
+{% endblock %}
