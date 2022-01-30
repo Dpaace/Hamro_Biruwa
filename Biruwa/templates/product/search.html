@@ -23,6 +23,21 @@
         </div>
         {% endfor %}
     </div>
+    <div class="row mx-auto container">
+        {% for prod in blog %}
+        <div class="product text-center">
+            <a href="{% url 'blog_detail' prod.id %}">
+                <img class="img-fluid mb-3" src="{{ prod.blog_photo.url }}" alt="">
+            </a>
+            <a href="{% url 'blog_detail' prod.id %}">
+                <h5 class="p-name">{{ prod.blog_title }}</h5>
+            </a>
+            <a href="{% url 'blog_detail' prod.id  %}">
+                <button class="buy-btn">Read More</button>
+            </a>
+        </div>
+        {% endfor %}
+    </div>
 </section>
 
 {% endblock %}

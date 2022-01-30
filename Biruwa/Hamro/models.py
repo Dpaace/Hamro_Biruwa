@@ -10,6 +10,15 @@ from django.contrib.auth.models import AbstractUser
 
 class AuthUser(AbstractUser):
     phone_number = models.CharField(max_length=15,null=True)
+
+class Blog(models.Model):
+    blog_title = models.CharField(max_length=255)
+    blog_photo = models.ImageField(upload_to='photos/%Y/%m/%d/')
+    description = RichTextField()
+    created_date = models.DateTimeField(default=datetime.now, blank=True)
+
+    def __str__(self):
+        return self.blog_title
     
 class Gallery(models.Model):
     photo_title = models.CharField(max_length=285)
