@@ -2,6 +2,7 @@ import imp
 from django.shortcuts import get_object_or_404, redirect, render
 from . import models
 from .models import Product
+from Hamro.models import Blog
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.contrib import messages, auth
 
@@ -25,8 +26,8 @@ def product_detail(request, id):
 
     return render(request, 'product/product_detail.html', data)
 
-def cart(request):
-    return render(request, 'product/cart.html')
+# def cart(request):
+#     return render(request, 'product/cart.html')
 
 def add_to_cart_view(request, pk):
     products = models.Product.objects.all()
@@ -119,3 +120,36 @@ def remove_from_cart_view(request,pk):
             response.delete_cookie('product_ids')
         response.set_cookie('product_ids',value)
         return response
+
+
+# For Searching Products
+def search(request):
+    product = Product.objects.order_by('-created_date')
+    blog = Blog.objects.order_by('-created_date')
+
+    product_search = Product.objects.values_list('product_title', flat=True).distinct()
+    blog_search = Blog.objects.values_list('blog_title', flat=True).distinct()
+
+    
+    if 'keyword' in request.GET:
+        keyword = request.GET['keyword']
+        if keyword:
+            product = product.filter(description__icontains=keyword)
+
+    if 'product_title' in request.GET:
+        product_title = request.GET['product_title']
+        if product_title:
+            product = product.filter(model__iexact=product_title)
+    
+    if 'blog_title' in request.GET:
+        blog_title = request.GET['blog_title']
+        if Blog.objects.order_by('-created_date'):
+            blog = blog.filter(model__iexact=blog_title)
+
+    data = {
+        'product': product,
+        'product_search': product_search,
+        'blog_search':blog_search,
+        
+    }
+    return render(request, 'product/search.html', data)

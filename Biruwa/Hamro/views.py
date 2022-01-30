@@ -4,8 +4,9 @@ from django.urls.conf import include
 from django.contrib import messages
 from django.contrib.auth import  authenticate , get_user_model , logout
 from django.contrib.auth.models import auth, User
-from Hamro.models import Gallery, News
-from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
+from Hamro.models import Gallery, News, Blog
+from django.core.paginator import Paginator
+from django.shortcuts import get_object_or_404
 from . import models
 from product import models
 # from product import models
@@ -79,6 +80,25 @@ def about(request):
 
 def contact(request):
     return render(request, 'pages/contact.html')
+
+def blog(request):
+    blog = Blog.objects.order_by('-created_date')
+    paginator = Paginator(blog, 4)
+    page = request.GET.get('page')
+    paged_product = paginator.get_page(page)
+    data = {
+        'blog': paged_product,
+    }
+    return render(request, 'pages/blog.html', data)
+
+def blog_detail(request, id):
+    single_blog = get_object_or_404(Blog, pk=id)
+
+    data = {
+        'single_blog': single_blog,
+    }
+
+    return render(request, 'pages/blog_detail.html', data)
 
 def gallery(request):
     gallery = Gallery.objects.all()

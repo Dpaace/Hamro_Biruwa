@@ -55,6 +55,3 @@ smallImg[3].onclick = function () {
 // gallery part
 baguetteBox.run(".tz-gallery");
 
-setTimeout(function () {
-    $('#message').fadeOut('slow');
-}, 4000)
