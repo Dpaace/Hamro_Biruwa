@@ -12,6 +12,7 @@ from product import models
 # from product import models
 from Hamro.forms import UserResgistrationForm
 from Hamro.models import AuthUser
+from django.core.mail import send_mail
 
 User = get_user_model()
 
@@ -79,7 +80,24 @@ def about(request):
     return render(request, 'pages/about.html')
 
 def contact(request):
-    return render(request, 'pages/contact.html')
+    if request.method == "POST":
+        message_name = request.POST['message_name']
+        message_email = request.POST['message_email'] 
+        message =request.POST['message']
+
+        send_mail(
+            message_name, #subject
+            message, #message
+            message_email, #from email
+            # settings.EMAIL_HOST_USER,
+            #           ['riyastha406@mail.com'],
+            ['biruwahamro@gmail.com' ], #To email
+            # fail_silently= True,
+        )   
+        return render(request, 'pages/contact.html', {'message_name': message_name}) 
+
+    else:
+        return render(request, 'pages/contact.html' , {})      
 
 def blog(request):
     blog = Blog.objects.order_by('-created_date')
