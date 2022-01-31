@@ -3,9 +3,24 @@
 {% load static %}
 
 <!-- <div class="img-content"></div> -->
+
+
 <section class="container mt-5 pt-5">
     <div class="row mt-5 pt-5">
         <div class="col-lg-6">
+
+
+            {% if message_name %}
+                <section>
+                <h2 style="text-align: center;">
+                    Thanks {{ message_name}}!
+                </h2>
+
+                <p style="text-align: center;">
+                    we received your email and will respond shortly...
+                </p>
+                </section>
+            {% else %}
             <h3 class="row col-lg-12 d-flex justify-content-center">Get In Touch With Us</h3>
             <div class="row d-flex justify-content-center">
                 <!-- <div class="icon"></div> -->
@@ -33,20 +48,22 @@
             </div>
         </div>
         <div class="col-lg-6">
-            <form action="">
+
+            <form method="POST" enctype="multipart/form-data" action="{% url 'Hamro:contact' %}">
+                {% csrf_token %}
                 <h2 row col-lg-12 d-flex justify-content-center>Send Message</h2>
                 <div class="row col-lg-12">
-                    <input type="text" name="" required="required">
+                    <input type="text" name="message_name" required="required">
                     <span>Full Name</span>
                 </div>
 
                 <div class="row col-lg-12">
-                    <input type="text" name="" required="required">
+                    <input type="text" name="message_email" required="required">
                     <span>Email</span>
                 </div>
 
                 <div class="row col-lg-12">
-                    <input type="text" name="" required="required">
+                    <input type="text" name="message" required="required">
                     <span>Type your Message</span>
 
                 </div>
@@ -59,5 +76,6 @@
     </div>
 </section>
 </body>
+{% endif %}
 
 {% endblock %}

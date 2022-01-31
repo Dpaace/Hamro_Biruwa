@@ -42,7 +42,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">
+                    <a class="nav-link" href="{% url 'Hamro:blog' %}">
                         Blog
                     </a>
                 </li>
@@ -83,6 +83,7 @@
                                         <li>{{ request.user.first_name}}</li>
                                         <li><a href={% url 'Hamro:dashboard' %}>Dashboard</a></li>
                                         <li><a href={% url 'Hamro:logout' %}>Signout</a></li>
+                                        <li><a href="/deleteuser/{{ request.user.id }}">Delete</a></li>
                                     </ul>
                             </div>
                         </li>
