@@ -101,14 +101,23 @@
             <p>Here you can check out our new materials with fair price</p>
         </div>
         <div class="row mx-auto container-fluid">
+            {% for mproduct in material_product %}
             <div class="product text-center col-lg-3 col-md-4 col-12">
-                <img class="img-fluid mb-3" src="/static/Images/Seeds/1.jpeg" alt="">
-                <h5 class="p-name">Apple Seeds</h5>
-                <h4 class="p-price">Rs 100</h4>
-                <button class="buy-btn">Buy Now</button>
+                <a href="{% url 'product_detail' mproduct.id %}">
+                    <img class="img-fluid mb-3" src="{{ mproduct.product_photo.url}}" alt="">
+                </a>
+                <a href="{% url 'product_detail' mproduct.id %}">
+                    <h5 class="p-name">{{ mproduct.product_title }}</h5>
+                </a>
+                <h4 class="p-price">Rs {{ mproduct.price }}</h4>
+                <a href="{% url 'add-to-cart' mproduct.id  %}">
+                    <button class="buy-btn">Add To Cart</button>
+                </a> 
             </div>
+            {% endfor %}
            
         </div>
     </section>
+    
     
 {% endblock %} 
