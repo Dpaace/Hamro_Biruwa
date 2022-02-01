@@ -1,9 +1,15 @@
 import imp
 from django.shortcuts import get_object_or_404, redirect, render
-from . import models
+from product import forms,models
 from .models import Product
+from Hamro.models import Blog
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.contrib import messages, auth
+from django.contrib.auth.models import User
+from Hamro import forms
+from django.contrib.auth import  get_user_model 
+
+User = get_user_model()
 
 # Create your views here.
 def product(request):
@@ -25,8 +31,8 @@ def product_detail(request, id):
 
     return render(request, 'product/product_detail.html', data)
 
-def cart(request):
-    return render(request, 'product/cart.html')
+# def cart(request):
+#     return render(request, 'product/cart.html')
 
 def add_to_cart_view(request, pk):
     products = models.Product.objects.all()
@@ -119,3 +125,114 @@ def remove_from_cart_view(request,pk):
             response.delete_cookie('product_ids')
         response.set_cookie('product_ids',value)
         return response
+
+
+# For Searching Products
+def search(request):
+    product = Product.objects.order_by('-created_date')
+    blog = Blog.objects.order_by('-created_date')
+
+    product_search = Product.objects.values_list('product_title', flat=True).distinct()
+    blog_search = Blog.objects.values_list('blog_title', flat=True).distinct()
+
+    
+    if 'keyword' in request.GET:
+        keyword = request.GET['keyword']
+        if keyword:
+            product = product.filter(description__icontains=keyword)
+
+    if 'product_title' in request.GET:
+        product_title = request.GET['product_title']
+        if product_title:
+            product = product.filter(model__iexact=product_title)
+    
+    if 'blog_title' in request.GET:
+        blog_title = request.GET['blog_title']
+        if Blog.objects.order_by('-created_date'):
+            blog = blog.filter(model__iexact=blog_title)
+
+    data = {
+        'product': product,
+        'product_search': product_search,
+        'blog_search':blog_search,
+        
+    }
+    return render(request, 'product/search.html', data)
+
+def customer_address_view(request):
+    product_in_cart=False
+    if 'product_ids' in request.COOKIES:
+        product_ids = request.COOKIES['product_ids']
+        if product_ids != "":
+            product_in_cart=True
+
+    #for counter in cart
+    if 'product_ids' in request.COOKIES:
+        product_ids = request.COOKIES['product_ids']
+        counter=product_ids.split('|')
+        product_count_in_cart=len(set(counter))
+    else:
+        product_count_in_cart=0
+
+    addressForm = forms.AddressForm()
+    if request.method == 'POST':
+        addressForm = forms.AddressForm(request.POST)
+        if addressForm.is_valid():
+            # here we are taking address, email, mobile at time of order placement
+            # we are not taking it from customer account table because
+            # these thing can be changes
+            email = addressForm.cleaned_data['Email']
+            mobile=addressForm.cleaned_data['Mobile']
+            address = addressForm.cleaned_data['Address']
+            #for showing total price on payment page.....accessing id from cookies then fetching  price of product from db
+            total=0
+            if 'product_ids' in request.COOKIES:
+                product_ids = request.COOKIES['product_ids']
+                if product_ids != "":
+                    product_id_in_cart=product_ids.split('|')
+                    products=models.Product.objects.all().filter(id__in = product_id_in_cart)
+                    for p in products:
+                        total=total+p.price
+
+            response = render(request, 'product/payment.html',{'total':total})
+            response.set_cookie('email',email)
+            response.set_cookie('mobile',mobile)
+            response.set_cookie('address',address)
+            return response
+    return render(request,'product/customer_address.html',{'addressForm':addressForm,'product_in_cart':product_in_cart,'product_count_in_cart':product_count_in_cart})
+
+def payment_success_view(request, user_id):
+    user = User.objects.get(id=user_id)
+    products=None
+    email=None
+    mobile=None
+    address=None
+    if 'product_ids' in request.COOKIES:
+        product_ids = request.COOKIES['product_ids']
+        if product_ids != "":
+            product_id_in_cart=product_ids.split('|')
+            products=models.Product.objects.all().filter(id__in = product_id_in_cart)
+            # Here we get products list that will be ordered by one customer at a time
+
+    # these things can be change so accessing at the time of order...
+    if 'email' in request.COOKIES:
+        email=request.COOKIES['email']
+    if 'mobile' in request.COOKIES:
+        mobile=request.COOKIES['mobile']
+    if 'address' in request.COOKIES:
+        address=request.COOKIES['address']
+
+    # here we are placing number of orders as much there is a products
+    # suppose if we have 5 items in cart and we place order....so 5 rows will be created in orders table
+    # there will be lot of redundant data in orders table...but its become more complicated if we normalize it
+    for product in products:
+        models.Orders.objects.get_or_create(user=user,product=product,status='Pending',email=email,mobile=mobile,address=address)
+
+    # after order placed cookies should be deleted
+    response = render(request,'product/payment_success.html')
+    response.delete_cookie('product_ids')
+    response.delete_cookie('email')
+    response.delete_cookie('mobile')
+    response.delete_cookie('address')
+    return response
+

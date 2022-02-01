@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'ckeditor',
+    'widget_tweaks',
 ]
 
 MIDDLEWARE = [
@@ -81,7 +82,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'biruwa_db',
         'USER': 'postgres',
-        'PASSWORD': 'IRONman@123',
+        'PASSWORD': 'root7',
         'HOST': 'localhost',
     }
 }
@@ -143,4 +144,14 @@ MESSAGE_TAGS = {
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'Hamro.AuthUser'
+
+#Email setting
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = '587'
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'biruwahamro@gmail.com'
+EMAIL_HOST_PASSWORD = 'colffuwajcdwcbdg'
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
