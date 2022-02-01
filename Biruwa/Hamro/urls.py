@@ -8,7 +8,7 @@ app_name = "Hamro"
 urlpatterns = [
     path('', views.home, name='home'),
     path("register/",views.register, name='register'),
-    path("login/", views.login_fn, name='login'),
+    path('login', views.login_fn, name='login'),
     path('contact', views.contact, name='contact'),
     path('about', views.about, name='about'),
     path('blog', views.blog, name='blog'),
@@ -22,5 +22,6 @@ urlpatterns = [
 
     path("password_reset", views.password_reset_request, name="password_reset"),
     
-    
+    # User Related Views
+    path('edit-profile', views.edit_profile_view,name='edit-profile'),
 ]

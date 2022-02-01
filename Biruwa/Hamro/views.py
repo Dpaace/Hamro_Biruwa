@@ -1,17 +1,18 @@
-from django.forms.forms import Form
+from django.http import HttpResponseRedirect
 from django.shortcuts import redirect, render, HttpResponse
 from django.urls.conf import include
 from django.contrib import messages
 from django.contrib.auth import  authenticate , get_user_model , logout, login
 from django.contrib.auth.models import auth, User
+from . import forms, models
 from Hamro.models import Gallery, News, Blog
 from django.core.paginator import Paginator
 from django.shortcuts import get_object_or_404
+from django.contrib.auth.decorators import login_required
 from . import models
-from product import models
+
 # from product import models
 from Hamro.forms import UserResgistrationForm
-from Hamro.models import AuthUser
 from django.core.mail import send_mail
 
 User = get_user_model()
@@ -152,8 +153,7 @@ def logout(request):
     auth.logout(request)
     return redirect('Hamro:home')
 
-def dashboard(request):
-    return render(request, 'pages/dashboard.html')
+
 
 def delete_user(request, user_id):
     user = User.objects.get(id=user_id)
@@ -190,3 +190,25 @@ def password_reset_request(request):
 	return render(request=request, template_name="pages/accounts/password_reset_form.html", context={"password_reset_form":password_reset_form})
 
 
+@login_required(login_url='Hamro:login')
+def dashboard(request):
+    return render(request, 'pages/dashboard.html')
+
+@login_required(login_url='Hamro:login')
+def edit_profile_view(request):
+    user=User.objects.get(id=request.user.id)
+    userForm=forms.UserResgistrationForm(instance=user)
+    mydict={
+        'UserResgistrationForm':UserResgistrationForm,
+        'user':user
+    }
+    if request.method=='POST':
+        userForm=forms.UserResgistrationForm(request.POST, request.FILES, instance=user)
+        if userForm.is_valid():
+            user.set_password(user.password)
+            userForm.save()
+            # user.set_password(user.password)
+            # user.save()
+            return HttpResponseRedirect('dashboard')
+
+    return render(request,'pages/edit_profile.html',context=mydict)
