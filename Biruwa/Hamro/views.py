@@ -62,7 +62,7 @@ def register(request):
                                 phone_number=phone_number,
                                 password=password)
             user.save()
-
+            return redirect('Hamro:login')
     context = {
         "form": form 
     }
@@ -159,7 +159,7 @@ def delete_user(request, user_id):
     user = User.objects.get(id=user_id)
     user.delete()
     messages.add_message(request, messages.SUCCESS, 'User is deleted successfully')
-    return redirect('login')
+    return redirect('Hamro:login')
 
 def password_reset_request(request):
 	if request.method == "POST":
