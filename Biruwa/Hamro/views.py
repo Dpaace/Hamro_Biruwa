@@ -34,8 +34,10 @@ from django.utils.encoding import force_bytes
 def home(request):
     # For showing featured Products
     featured_product = Product.objects.order_by('-created_date').filter(is_featured=True)
+    material_product = Product.objects.order_by('-created_date').filter(is_material=True)
     data = {
         'featured_product': featured_product,
+        'material_product':material_product,
     }
     return render(request, 'pages/home.html',data)
 

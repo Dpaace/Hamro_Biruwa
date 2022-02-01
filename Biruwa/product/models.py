@@ -15,6 +15,7 @@ class Product(models.Model):
     product_photo_3 = models.ImageField(upload_to='photos/%Y/%m/%d/', blank=True)
     product_photo_4 = models.ImageField(upload_to='photos/%Y/%m/%d/', blank=True)
     is_featured = models.BooleanField(default=False)
+    is_material = models.BooleanField(default=False)
     created_date = models.DateTimeField(default=datetime.now, blank=True)
 
     def __str__(self):
