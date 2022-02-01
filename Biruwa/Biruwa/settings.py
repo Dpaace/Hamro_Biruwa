@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'ckeditor',
+    'widget_tweaks',
 ]
 
 MIDDLEWARE = [
@@ -81,7 +82,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'biruwa_db',
         'USER': 'postgres',
-        'PASSWORD': '#Leshmania#406',
+        'PASSWORD': 'root7',
         'HOST': 'localhost',
     }
 }
@@ -151,9 +152,6 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = '587'
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'biruwahamro@gmail.com'
-# EMAIL_HOST_PASSWORD ='#leshmaniadonovani#406'
 EMAIL_HOST_PASSWORD = 'colffuwajcdwcbdg'
-# EMAIL_USE_SSL =False
-# ACCOUNT_EMAIL_VERIFICATION ='none'
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
