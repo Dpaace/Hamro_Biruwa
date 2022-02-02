@@ -20,7 +20,16 @@ class Blog(models.Model):
 
     def __str__(self):
         return self.blog_title
-    
+
+class Brand(models.Model):
+    brand_photo1 = models.ImageField(upload_to='photos/%Y/%m/%d/')
+    brand_photo2 = models.ImageField(upload_to='photos/%Y/%m/%d/', blank=True)
+    brand_photo3 = models.ImageField(upload_to='photos/%Y/%m/%d/', blank=True)
+    brand_photo4 = models.ImageField(upload_to='photos/%Y/%m/%d/', blank=True)
+    brand_photo5 = models.ImageField(upload_to='photos/%Y/%m/%d/', blank=True)
+    brand_photo6 = models.ImageField(upload_to='photos/%Y/%m/%d/', blank=True)
+    created_date = models.DateTimeField(default=datetime.now, blank=True)
+
 class Gallery(models.Model):
     photo_title = models.CharField(max_length=285)
     photo = models.ImageField(upload_to='photos/%Y/%m/%d')

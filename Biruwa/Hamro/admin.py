@@ -1,5 +1,5 @@
 from django.contrib import admin
-from Hamro.models import Gallery, News, Blog
+from Hamro.models import Gallery, News, Blog, Brand
 from django.utils.html import format_html
 
 from Hamro.models import AuthUser
@@ -7,6 +7,8 @@ from Hamro.models import AuthUser
 # Register your models here.
 
 admin.site.register(AuthUser)
+
+admin.site.register(Brand)
 
 class BlogAdmin(admin.ModelAdmin):
     def thumbnail(self, object):
