@@ -109,7 +109,9 @@
 <section id="brand" class="container-fluid">
     <div class="row m-0 py-5">
         {% for bp in brand_photo %}
+        {% if bp.brand_photo_1 %}
         <img class="img-fluid col-lg-2 col-md-4 col-6" src="{{ bp.brand_photo_1.url }}" alt="Brand 1">
+        {% endif %}
         {% if bp.brand_photo_2 %}
         <img class="img-fluid col-lg-2 col-md-4 col-6" src="{{ bp.brand_photo_2.url }}" alt="Brand 2">
         {% endif %}
@@ -236,9 +238,7 @@
         </form>
     </div>
 </section>
-
 <!-- Review -->
-
 <div class="testimonials">
     <div class="inner">
         <h1>Clients Review</h1>
