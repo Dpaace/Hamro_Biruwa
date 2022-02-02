@@ -3,17 +3,100 @@
 {% block content %}
 
 {% load static %}
-    
-    <!-- HOME -->
-    <section id="slider">
-        <ul class="slider-carousel col-lg-12 col-md-12 col-12" id="slider-carouesel">
-            <li class="img1"></li>
-            <li class="img2"></li>
-            <li class="img3"></li>
-            <li class="img4"></li>
-        </ul>
-    </section>
-    <!-- <section id="home">
+
+<head>
+    <style>
+        /* Reviews */
+        .testimonials {
+            padding: 40px 0;
+            background: #f1f1f1;
+            color: #434343;
+            text-align: center;
+        }
+
+        .inner {
+            max-width: 1200px;
+            margin: auto;
+            overflow: hidden;
+            padding: 0 20px;
+        }
+
+        .border {
+            width: 160px;
+            height: 5px;
+            background: #6ab04c;
+            margin: 26px auto;
+        }
+
+        .place {
+            font-style: italic;
+            color: red;
+        }
+
+        .row-review {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .col-review {
+            flex: 33.33%;
+            max-width: 33.33%;
+            box-sizing: border-box;
+            padding: 15px;
+
+        }
+
+        .testimonial {
+            background: #fff;
+            padding: 30px;
+        }
+
+        .testimonial img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            box-shadow: 10px 10px 10px 0 gray;
+        }
+
+        .name {
+            font-size: 20px;
+            text-transform: none;
+            margin: 20px 0;
+        }
+
+        .stars {
+            color: green;
+            margin-bottom: 20px;
+        }
+
+
+        @media screen and (max-width:960px) {
+            .col-review {
+                flex: 100%;
+                max-width: 80%;
+            }
+        }
+
+        @media screen and (max-width:600px) {
+            .col-review {
+                flex: 100%;
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<!-- HOME -->
+<section id="slider">
+    <ul class="slider-carousel col-lg-12 col-md-12 col-12" id="slider-carouesel">
+        <li class="img1"></li>
+        <li class="img2"></li>
+        <li class="img3"></li>
+        <li class="img4"></li>
+    </ul>
+</section>
+<!-- <section id="home">
         <div class="container">
             <h5>NEW ARRIVALS</h5>
             <h1><span>Best Price</span> This Year</h1>
@@ -22,172 +105,211 @@
             <button>Shop Now</button>
         </div>
     </section> -->
-    <!-- BRAND -->
-    <section id="brand" class="container">
-        <div class="row m-0 py-5">
-            <img class="img-fluid col-lg-2 col-md-4 col-6" src="/static/Images/Brand/adidas.jpg" alt="Adidas">
-            <img class="img-fluid col-lg-2 col-md-4 col-6" src="/static/Images/Brand/adidas.jpg" alt="Adidas">
-            <img class="img-fluid col-lg-2 col-md-4 col-6" src="/static/Images/Brand/adidas.jpg" alt="Adidas">
-            <img class="img-fluid col-lg-2 col-md-4 col-6" src="/static/Images/Brand/adidas.jpg" alt="Adidas">
-            <img class="img-fluid col-lg-2 col-md-4 col-6" src="/static/Images/Brand/adidas.jpg" alt="Adidas">
-            <img class="img-fluid col-lg-2 col-md-4 col-6" src="/static/Images/Brand/adidas.jpg" alt="Adidas">
+<!-- BRAND -->
+<section id="brand" class="container-fluid">
+    <div class="row m-0 py-5">
+        {% for bp in brand_photo %}
+        <img class="img-fluid col-lg-2 col-md-4 col-6" src="{{ bp.brand_photo_1.url }}" alt="Brand 1">
+        {% if bp.brand_photo_2 %}
+        <img class="img-fluid col-lg-2 col-md-4 col-6" src="{{ bp.brand_photo_2.url }}" alt="Brand 2">
+        {% endif %}
+        {% if bp.brand_photo_3 %}
+        <img class="img-fluid col-lg-2 col-md-4 col-6" src="{{ bp.brand_photo_3.url }}" alt="Brand 3">
+        {% endif %}
+        {% if bp.brand_photo_4 %}
+        <img class="img-fluid col-lg-2 col-md-4 col-6" src="{{ bp.brand_photo_4.url }}" alt="Brand 4">
+        {% endif %}
+        {% if bp.brand_photo_5 %}
+        <img class="img-fluid col-lg-2 col-md-4 col-6" src="{{ bp.brand_photo_5.url }}" alt="Brand 5">
+        {% endif %}
+        {% if bp.brand_photo_6 %}
+        <img class="img-fluid col-lg-2 col-md-4 col-6" src="{{ bp.brand_photo_6.url }}" alt="Brand 6">
+        {% endif %}
+        {% endfor %}
+    </div>
+</section>
+<!-- CATEGORY -->
+<section id="new" class="w-100">
+    <div class="row p-0 m-0 ">
+        <div class="one col-lg-4 col-md-12 col-12 p-0">
+            <img class="img-fluid" src="/static/Images/seeds.jpeg" alt="">
+            <div class="details">
+                <h2>Seeds All Over</h2>
+            </div>
+        </div>
+        <div class="one col-lg-4 col-md-12 col-12 p-0">
+            <img class="img-fluid" src="/static/Images/seedling.jpeg" alt="">
+            <div class="details">
+                <h2>Ready to Plant</h2>
+            </div>
+        </div>
+        <div class="one col-lg-4 col-md-12 col-12 p-0">
+            <img class="img-fluid" src="/static/Images/tools.jpeg" alt="">
+            <div class="details">
+                <h2>The Needed Power</h2>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- FEATURED -->
+<section id="featured" class="my-5 pb-5">
+    <div class="container text-center mt-5 py-5">
+        <h3>Our Featured</h3>
+        <hr class="mx-auto">
+        <p>Here you can check out our new products with fair price</p>
+    </div>
+    <div class="row mx-auto container-fluid">
+        {% for fproduct in featured_product %}
+        <div class="product text-center col-lg-3 col-md-4 col-12">
+            <a href="{% url 'product_detail' fproduct.id %}">
+                <img class="img-fluid mb-3" src="{{ fproduct.product_photo.url}}" alt="">
+            </a>
+            <a href="{% url 'product_detail' fproduct.id %}">
+                <h5 class="p-name">{{ fproduct.product_title }}</h5>
+            </a>
+            <h4 class="p-price">Rs {{ fproduct.price }}</h4>
+            <a href="{% url 'add-to-cart' fproduct.id  %}">
+                <button class="buy-btn">Add To Cart</button>
+            </a>
 
         </div>
-    </section>
-    <!-- CATEGORY -->
-    <section id="new" class="w-100">
-        <div class="row p-0 m-0 ">
-            <div class="one col-lg-4 col-md-12 col-12 p-0">
-                <img class="img-fluid" src="/static/Images/seeds.jpeg" alt="">
-                <div class="details">
-                    <h2>Seeds All Over</h2>
-                    <button class="text-uppercase">Shop Now</button>
-                </div>
-            </div>
-            <div class="one col-lg-4 col-md-12 col-12 p-0">
-                <img class="img-fluid" src="/static/Images/seedling.jpeg" alt="">
-                <div class="details">
-                    <h2>Ready to Plant</h2>
-                    <button class="text-uppercase">Shop Now</button>
-                </div>
-            </div>
-            <div class="one col-lg-4 col-md-12 col-12 p-0">
-                <img class="img-fluid" src="/static/Images/tools.jpeg" alt="">
-                <div class="details">
-                    <h2>The Needed Power</h2>
-                    <button class="text-uppercase">Shop Now</button>
-                </div>
-            </div>
+        {% endfor %}
+    </div>
+</section>
+<!-- MATERIALS -->
+<section id="seeds" class="my-5 pb-5">
+    <div class="container text-center mt-5 py-5">
+        <h3>Our Materials</h3>
+        <hr class="mx-auto">
+        <p>Here you can check out our new materials with fair price</p>
+    </div>
+    <div class="row mx-auto container-fluid">
+        {% for mproduct in material_product %}
+        <div class="product text-center col-lg-3 col-md-4 col-12">
+            <a href="{% url 'product_detail' mproduct.id %}">
+                <img class="img-fluid mb-3" src="{{ mproduct.product_photo.url}}" alt="">
+            </a>
+            <a href="{% url 'product_detail' mproduct.id %}">
+                <h5 class="p-name">{{ mproduct.product_title }}</h5>
+            </a>
+            <h4 class="p-price">Rs {{ mproduct.price }}</h4>
+            <a href="{% url 'add-to-cart' mproduct.id  %}">
+                <button class="buy-btn">Add To Cart</button>
+            </a>
         </div>
-    </section>
-    <!-- FEATURED -->
-    <section id="featured" class="my-5 pb-5">
-        <div class="container text-center mt-5 py-5">
-            <h3>Our Featured</h3>
-            <hr class="mx-auto">
-            <p>Here you can check out our new products with fair price</p>
+        {% endfor %}
+
+    </div>
+</section>
+<!-- MEDICINES -->
+<section id="seeds" class="my-5 pb-5">
+    <div class="container text-center mt-5 py-5">
+        <h3>Our Medicines</h3>
+        <hr class="mx-auto">
+        <p>Here you can check out our new medicines with fair price</p>
+    </div>
+    <div class="row mx-auto container-fluid">
+        {% for mproduct in medicine_product %}
+        <div class="product text-center col-lg-3 col-md-4 col-12">
+            <a href="{% url 'product_detail' mproduct.id %}">
+                <img class="img-fluid mb-3" src="{{ mproduct.product_photo.url}}" alt="">
+            </a>
+            <a href="{% url 'product_detail' mproduct.id %}">
+                <h5 class="p-name">{{ mproduct.product_title }}</h5>
+            </a>
+            <h4 class="p-price">Rs {{ mproduct.price }}</h4>
+            <a href="{% url 'add-to-cart' mproduct.id  %}">
+                <button class="buy-btn">Add To Cart</button>
+            </a>
         </div>
-        <div class="row mx-auto container-fluid">
-            {% for fproduct in featured_product %}
-            <div class="product text-center col-lg-3 col-md-4 col-12">
-                <a href="{% url 'product_detail' fproduct.id %}">
-                    <img class="img-fluid mb-3" src="{{ fproduct.product_photo.url}}" alt="">
-                </a>
-                <a href="{% url 'product_detail' fproduct.id %}">
-                    <h5 class="p-name">{{ fproduct.product_title }}</h5>
-                </a>
-                <h4 class="p-price">Rs {{ fproduct.price }}</h4>
-                <a href="{% url 'add-to-cart' fproduct.id  %}">
-                    <button class="buy-btn">Add To Cart</button>
-                </a>
-                
-            </div>
-            {% endfor %}
-        </div>
-    </section>
-    <!-- BANNER -->
-    <section id="banner" class="my-5 py-5">
-        <div class="container">
+        {% endfor %}
+
+    </div>
+</section>
+<!-- BANNER -->
+<section id="banner" class="my-5 py-5">
+    <div class="container">
+        <form action="{% url 'product' %}">
             <h4>MID SEASON'S SALE</h4>
             <h1>Autumn Collection<br>UP TP 20% OFF</h1>
             <button class="text-uppercase">Shop Now</button>
-        </div>
-    </section>
-    <!-- SEEDS -->
-    <section id="seeds" class="my-5 pb-5">
-        <div class="container text-center mt-5 py-5">
-            <h3>Our Materials</h3>
-            <hr class="mx-auto">
-            <p>Here you can check out our new materials with fair price</p>
-        </div>
-        <div class="row mx-auto container-fluid">
-            {% for mproduct in material_product %}
-            <div class="product text-center col-lg-3 col-md-4 col-12">
-                <a href="{% url 'product_detail' mproduct.id %}">
-                    <img class="img-fluid mb-3" src="{{ mproduct.product_photo.url}}" alt="">
-                </a>
-                <a href="{% url 'product_detail' mproduct.id %}">
-                    <h5 class="p-name">{{ mproduct.product_title }}</h5>
-                </a>
-                <h4 class="p-price">Rs {{ mproduct.price }}</h4>
-                <a href="{% url 'add-to-cart' mproduct.id  %}">
-                    <button class="buy-btn">Add To Cart</button>
-                </a> 
-            </div>
-            {% endfor %}
-           
-        </div>
-    </section>
+        </form>
+    </div>
+</section>
 
+<!-- Review -->
 
-            <!-- Review -->
-
-            <div class="testimonials">
-                <div class="inner">
-                  <h1>Clients Review</h1>
-                  <div class="border"></div>
-              
-                  <div class="row">
-                    <div class="col">
-                      <div class="testimonial">
-                        <img src="{% static 'Images/dpace.jpeg' %}"  width="250px" alt="">
-                        <div class="name">Deepace</div>
-                        <div class="place">Germany</div>
-                        <div class="stars">
-                          <i class="fas fa-star"></i>
-                          <i class="fas fa-star"></i>
-                          <i class="fas fa-star"></i>
-                          <i class="fas fa-star"></i>
-                          <i class="fas fa-star"></i>
-                        </div>
-              
-                        <p>
-                            Because of this site's  simple  layout, it would appeal to someone who didn't  have any  technical  background.  There's no  high-tech  stuff here, just all the information  you need in a great design that's easy to understand and read. 
-                        </p>
-                      </div>
+<div class="testimonials">
+    <div class="inner">
+        <h1>Clients Review</h1>
+        <div class="border"></div>
+        <div class="row-review">
+            <div class="col-review">
+                <div class="testimonial">
+                    <img src="{% static 'Images/dpace.jpeg' %}" width="250px" alt="">
+                    <div class="name">Deepace</div>
+                    <div class="place">Germany</div>
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
                     </div>
-              
-                    <div class="col">
-                      <div class="testimonial">
-                        <img src="{% static 'Images/anup.jpeg' %}" width="250px" alt="">
-                        <div class="name">Anup Burlakoti</div>
-                        <div class="place">Austrila</div>
-                        <div class="stars">
-                          <i class="fas fa-star"></i>
-                          <i class="fas fa-star"></i>
-                          <i class="fas fa-star"></i>
-                          <i class="far fa-star"></i>
-                          <i class="far fa-star"></i>
-                        </div>
-              
-                        <p>
 
-                        This site would appeal to anyone, technical background or not, because it is simple and very  effective.  The  washed-out  image tiled in the background is very welcoming and would appeal to anyone.
-                        </p>
-                      </div>
-                    </div>
-              
-                    <div class="col">
-                      <div class="testimonial">
-                        <img src="{% static 'Images/rs.jpeg' %}" width="250px" alt="">
-                        <div class="name">Ronish Sherstha</div>
-                        <div class="place">Kathmandu</div>
-                        <div class="stars">
-                          <i class="fas fa-star"></i>
-                          <i class="fas fa-star"></i>
-                          <i class="fas fa-star"></i>
-                          <i class="fas fa-star"></i>
-                          <i class="far fa-star"></i>
-                        </div>
-              
-                        <p>
-                            This site  would  appeal to the  average  person in the way that it is very simply  done, and  everything  is very easy to find.  There is no messing  around  here, just the  information  that they want to convey presented in the simplest way possible.  People with no technical back ground  would  definitely   appreciate  the  simplicity  and  ease  of navigation in this site.
-                        </p>
-                      </div>
-                    </div>
-                  </div>
+                    <p>
+                        Because of this site's simple layout, it would appeal to someone who didn't have any technical
+                        background. There's no high-tech stuff here, just all the information you need in a great design
+                        that's easy to understand.
+                    </p>
                 </div>
-              </div>    
-    
-    
-{% endblock %} 
+            </div>
+
+            <div class="col-review"">
+                <div class="testimonial">
+                    <img src="{% static 'Images/anup.jpeg' %}" width="250px" alt="">
+                    <div class="name">Anup Burlakoti</div>
+                    <div class="place">Austrila</div>
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="far fa-star"></i>
+                        <i class="far fa-star"></i>
+                    </div>
+
+                    <p>
+
+                        This site would appeal to anyone, technical background or not, because it is simple and very
+                        effective. The washed-out image tiled in the background is very welcoming and would appeal to
+                        anyone.
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-review"">
+                <div class="testimonial">
+                    <img src="{% static 'Images/rs.jpeg' %}" width="250px" alt="">
+                    <div class="name">Ronish Sherstha</div>
+                    <div class="place">Kathmandu</div>
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="far fa-star"></i>
+                    </div>
+
+                    <p>
+                        This site would appeal to the average person in the way that it is very simply done, and
+                        everything is very easy to find. There is no messing around here, just the information that they
+                        want to convey presented in the simplest way.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
