@@ -3,21 +3,54 @@
 {% block content %}
 <head>
     <style>
-        .red{
-            height: 200px;
-            width: 100%;
-            background-color: red;
-        }
+      .text-center{
+        font-size: 30px;
+        text-transform: uppercase;
+        font-weight: 700;
+      }
+      .container-userdata{
+        padding: 20px 0 50px 0;
+        border: 1px solid rgb(65, 62, 62);
+        border-radius: 10px;
+      }
+
+      .container-userdata ul{
+        margin-left: 30px;
+      }
+
+      h2{
+        text-align: center;
+      }
+
     </style>
 </head>
 <body>
+  {% comment %} <form method="POST" enctype="multipart/form-data">
+    {% csrf_token %} {% endcomment %}
     <div class="container red mt-5 pt-5">
         <br> <br> 
-        Hello {{ request.user.username}} <br><br>
-        <a href="{% url 'Hamro:edit-profile' %}">Edit Profile</a> <br>
-        <a href="/deleteuser/{{ request.user.id }}">Delete</a>
+        <div class="text-center">
+          Hello! {{ request.user.username}} <br>
+          <p style="text-transform: none; font-size: 23px; font-weight:normal">Personal info and options to manage it. You can make some of this info, like your contact details, visible to others so they can reach you easily. You can also see a summary of your profiles.</p>
+        </div><br><br>
+        <div class="container-userdata">
+          <h2>Basic info</h2>
+          <ul>
+            <h4>Name</h4> {{ request.user.first_name}}
+            {{ request.user.last_name}} <br><br>
+            <h4>Phone</h4>{{ request.user.phone_number}}<br><br>
+            <h4>Email</h4>{{ request.user.email}}  
+          </ul>
+        </div>
+        <div class="panel-footer">
+          <a href="{% url 'Hamro:edit-profile' %}"  type="button" class="btn btn-sm btn-primary" style="margin-top: 30px;"> Edit My Profile</a>
+          <a class="btn btn-sm btn-danger" href="/deleteuser/{{ request.user.id }}" style="margin-left: 30px; margin-top: 30px;">Delete</a>
+        </div>
+        
        
     </div>
 </body>
 
 {% endblock %}
+
+
