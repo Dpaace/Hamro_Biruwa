@@ -8,7 +8,7 @@ from Hamro.models import AuthUser
 
 admin.site.register(AuthUser)
 
-admin.site.register(Brand)
+
 
 class BlogAdmin(admin.ModelAdmin):
     def thumbnail(self, object):
@@ -37,3 +37,9 @@ class NewsAdmin(admin.ModelAdmin):
     list_display_links = ('id', 'news_title')
     
 admin.site.register(News, NewsAdmin)
+
+
+class BrandAdmin(admin.ModelAdmin):
+    list_display = ('id', 'brand_photo_1', 'brand_photo_2')
+    list_display_links = ('id', 'brand_photo_1')
+admin.site.register(Brand, BrandAdmin)
