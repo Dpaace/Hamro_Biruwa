@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'jazzmin',
     'product.apps.ProductConfig',
     'Hamro.apps.HamroConfig',
     'django.contrib.admin',
@@ -40,7 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'ckeditor',
-    # 'widget_tweaks',
+    'widget_tweaks',
 ]
 
 MIDDLEWARE = [
@@ -82,7 +83,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'biruwa_db',
         'USER': 'postgres',
-        'PASSWORD': 'IRONman@123',
+        'PASSWORD': 'root7',
         'HOST': 'localhost',
     }
 }
