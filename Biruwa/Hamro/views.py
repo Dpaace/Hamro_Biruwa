@@ -96,6 +96,12 @@ def login_fn(request):
 def about(request):
     return render(request, 'pages/about.html')
 
+def help(request):
+    return render(request, 'pages/help.html')
+
+def discussion(request):
+    return render(request, 'pages/discussion.html')
+
 def contact(request):
     if request.method == "POST":
         message_name = request.POST['message_name']
@@ -155,6 +161,7 @@ def news(request):
 
 def logout(request):
     auth.logout(request)
+    # messages.success(request, "Sucessfully Logged Out")
     return redirect('Hamro:home')
 
 
