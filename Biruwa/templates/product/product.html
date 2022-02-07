@@ -13,19 +13,22 @@
   <div class="row mx-auto container">
     {% include 'includes/messages.html' %}
     {% for prod in product %}
-    <div class="product text-center">
-      <a href="{% url 'product_detail' prod.id %}">
-        <img class="img-fluid mb-3" src="{{ prod.product_photo.url }}" alt="">
-      </a>
-      <a href="{% url 'product_detail' prod.id %}">
-        <h5 class="p-name">{{ prod.product_title }}</h5>
-      </a>
-      <h4 class="p-price">Rs {{ prod.price }}</h4>
-      <a href="{% url 'add-to-cart' prod.id  %}">
-        <button class="buy-btn">Add to Cart</button>
-      </a>
+    <form action="{% url 'add-to-cart' prod.id  %}" method="POST">
+      {% csrf_token %}
+      <div class="product text-center">
+        <a href="{% url 'product_detail' prod.id %}">
+          <img class="img-fluid mb-3" src="{{ prod.product_photo.url }}" alt="">
+        </a>
+        <a href="{% url 'product_detail' prod.id %}">
+          <h5 class="p-name">{{ prod.product_title }}</h5>
+        </a>
+        <h4 class="p-price">Rs {{ prod.price }}</h4>
+        <!-- <a href=""> -->
+          <button type="submit" class="buy-btn">Add to Cart</button>
+        <!-- </a> -->
 
-    </div>
+      </div>
+    </form>
     {% endfor %}
 
     <!-- PAGINATION STARTS -->

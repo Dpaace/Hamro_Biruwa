@@ -325,11 +325,11 @@ footer h5{
 footer li{
     padding-bottom: 4px;
 }
-footer li a{
+footer a{
     font-size: 0.8rem;
     color: #999;
 }
-footer li a:hover{
+footer a:hover{
     color: #D8D8D8;
 }
 footer p{
