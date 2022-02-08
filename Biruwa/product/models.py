@@ -24,21 +24,17 @@ class Product(models.Model):
     def __str__(self):
         return self.product_title
 
-class Cart(models.Model):
-    cart_id      = models.CharField(max_length=250, blank=True)
-    date_added   = models.DateField(auto_now_add=True)
-
-    def __str__(self):
-        return self.cart_id
-
-class CartItem(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    cart    = models.ForeignKey(Cart, on_delete=models.CASCADE, null=True)
-    is_active = models.BooleanField(default=True)
-
-    def sub_total(self):
-        return self.quantity * self.product.price
-
-    def __unicode__(self):
-        return self.product
+class Orders(models.Model):
+    STATUS =(
+        ('Pending','Pending'),
+        ('Order Confirmed','Order Confirmed'),
+        ('Out for Delivery','Out for Delivery'),
+        ('Delivered','Delivered'),
+    )
+    customer=models.ForeignKey(User, on_delete=models.CASCADE,null=True)
+    product=models.ForeignKey('Product',on_delete=models.CASCADE,null=True)
+    email = models.CharField(max_length=50,null=True)
+    address = models.CharField(max_length=500,null=True)
+    mobile = models.CharField(max_length=20,null=True)
+    order_date= models.DateField(auto_now_add=True,null=True)
+    status=models.CharField(max_length=50,null=True,choices=STATUS)

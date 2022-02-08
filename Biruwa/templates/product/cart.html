@@ -22,20 +22,20 @@
                   </tr>
                </thead>
                <tbody>
-                  {% for p in cart_items %}
+                  {% for p in products %}
                   {% if p %}
                   <tr>
                      <td>
                         <div class="product-img">
                            <div class="img-prdct">
-                              <img src="{{ p.product.product_photo.url }}">
+                              <img src="{{ p.product_photo.url }}">
                            </div>
                         </div>
                      </td>
                      <td>
-                        <p>{{ p.product.product_title }}</p>
+                        <p>{{ p.product_title }}</p>
                         <br>
-                        <a href="{% url 'remove_item' p.id %}">
+                        <a href="{% url 'remove-from-cart' p.id %}">
                            <i class="fas fa-trash-alt"></i>
                         </a>
                         
@@ -48,7 +48,7 @@
                         </div>
                      </td>
                      <td>
-                        <input type="text" value="{{ p.product.price }}" class="price form-control" disabled>
+                        <input type="text" value="{{ p.price }}" class="price form-control" disabled>
                      </td>
                      <td>$ <span id="amount" class="amount">0</span>
                      </td>
@@ -71,7 +71,7 @@
                      </div>
                      <br><br><br>
                      <div style="text-align: center;">
-                       <a href="#"><button class="button" ><span>Purchase </span></button></a>
+                       <a href="{% url 'customer-address' %}"><button class="button" ><span>Purchase </span></button></a>
                      </div>
                      </td>
                   </tr>
