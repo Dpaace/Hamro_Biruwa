@@ -1,78 +1,72 @@
-
 {% load static %}
-
 {% block content %}
-<head>
 
-</head>
-<style media="screen">
-
-.panel-title {display: inline;font-weight: bold;}
-.checkbox.pull-right { margin: 0; }
-.pl-ziro { padding-left: 0px; }
-</style>
-<br><br>
-<marquee scrolldelay="50">ITS FAKE PAYMENT PAGE. WE DONOT STORE YOUR DATA</marquee>
-<marquee scrolldelay="50">ITS JUST FOR DEMO</marquee>
-<br><br>
-<div class="container" style="text-align:center; padding-left:300px;">
-    <div class="row">
-        <div class="col-xs-12 col-md-4" style="height:500px; width:600px;">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title">
-                        Payment Details
-                    </h3>
-                    <div class="checkbox pull-right">
-                        <label>
-                            <input type="checkbox" />
-                            Remember
-                        </label>
-                    </div>
-                </div>
-                <div class="panel-body">
-                    <form role="form" method="post">
-                    <div class="form-group">
-                        <label for="cardNumber">
-                            CARD NUMBER</label>
-                        <div class="input-group">
-                            <input type="text" class="form-control" id="cardNumber" placeholder="Valid Card Number"
-                                required autofocus />
-                            <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-7 col-md-7">
-                            <div class="form-group">
-                                <label for="expityMonth">
-                                    EXPIRY DATE</label>
-                                <div class="col-xs-6 col-lg-6 pl-ziro">
-                                    <input type="text" class="form-control" id="expityMonth" placeholder="MM" required />
-                                </div>
-                                <div class="col-xs-6 col-lg-6 pl-ziro">
-                                    <input type="text" class="form-control" id="expityYear" placeholder="YY" required /></div>
-                            </div>
-                        </div>
-                        <div class="col-xs-5 col-md-5 pull-right">
-                            <div class="form-group">
-                                <label for="cvCode">
-                                    CV CODE</label>
-                                <input type="password" class="form-control" id="cvCode" placeholder="CV" required />
-                            </div>
-                        </div>
-                    </div>
-                    </form>
-                </div>
-            </div>
-            <ul class="nav nav-pills nav-stacked">
-                <li class="active"><a href="#"><span class="badge pull-right">{{total}}</span> Final Payment</a>
-                </li>
-            </ul>
-            <br/>
-            <a href="{% url 'payment-success' request.user.id %}" class="btn btn-success btn-lg btn-block" role="button">Pay</a>
-        </div>
-    </div>
-</div>
-
+<html>
+    <head>
+      <link
+        rel="stylesheet"
+        href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+        crossorigin="anonymous"
+      />
+      <style type="text/css">
+        .container {
+          margin-top: 8%;
+          width: 400px;
+          border: ridge 1.5px white;
+          padding: 20px;
+        }
+        body {
+          background: #e0eafc; /* fallback for old browsers */
+          background: -webkit-linear-gradient(
+            to right,
+            #cfdef3,
+            #e0eafc
+          ); /* Chrome 10-25, Safari 5.1-6 */
+          background: linear-gradient(
+            to right,
+            #cfdef3,
+            #e0eafc
+          ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+        }
+      </style>
+    </head>
+    <body>
+      <div></div>
+      <div class="container">
+        <h2>Payment Form</h2>
+        <form action="bootstrapform.php" method="post">
+          <div class="form-group">
+            <label for="firstname">Card Number</label>
+            <input
+              type="text"
+              class="form-control"
+              id="exampleInputfirstname"
+              name="firstname"
+            />
+          </div>
+          <div class="form-group">
+            <label for="lastname">Expiry Date</label>
+            <input
+              type="number"
+              class="form-control"
+              id="exampleInputlastname"
+              name="lastname"
+            />
+          </div>
+          <div class="form-group">
+            <label for="phoneno">CV Code</label>
+            <input
+              type="text"
+              class="form-control"
+              id="exampleInputphoneno"
+              name="phoneno"
+            />
+          </div>
+          <a href="{% url 'payment-success' request.user.id %}" class="btn btn-success btn-lg btn-block" role="button">Pay</a>
+        </form>
+      </div>
+    </body>
+  </html>
 
 {% endblock content %}
