@@ -4,11 +4,12 @@
 {% load static %}
 
 <section class="container sproduct my-5 pt-5">
-    
+
     <div class="row mt-5">
-        
+
         <div class="col-lg-5 col-md-12 col-12">
-            <img class="img-fluid w-100 pb-1" id="MainImg" src="{{ single_product.product_photo.url }}" alt="Main Image">
+            <img class="img-fluid w-100 pb-1" id="MainImg" src="{{ single_product.product_photo.url }}"
+                alt="Main Image">
             <div class="small-img-group">
                 {% if single_product.product_photo_1 %}
                 <div class="small-img-col">
@@ -30,23 +31,23 @@
                     <img src="{{ single_product.product_photo_4.url }}" width="100%" class="small-img" alt="Image 4">
                 </div>
                 {% endif %}
-                    </div>
+            </div>
         </div>
         <div class="col-lg-6 col-md-12 col-12">
-            <h6><a href="{% url 'Hamro:home' %}">Home</a> / Seeds</h6>
-            <h3 class="py-4">{{ single_product.product_title }}</h3>
-            <h2>Rs {{ single_product.price }}</h2>
-            
-            <a href="{% url 'add-to-cart' single_product.id  %}">
-                <button class="buy-btn">Add To Cart</button>
-            </a>
-            <h4 class="mt-5 mb-5">Product Description</h4>
-            <span>{{ single_product.description | safe }}
-            </span>
+            <form action="{% url 'add-to-cart' single_product.id  %}" method="POST">
+                {% csrf_token %}
+                <h6><a href="{% url 'Hamro:home' %}">Home</a> / Seeds</h6>
+                <h3 class="py-4">{{ single_product.product_title }}</h3>
+                <h2>Rs {{ single_product.price }}</h2>
+                <button type="submit" class="buy-btn">Add To Cart</button>
+                <h4 class="mt-5 mb-5">Product Description</h4>
+                <span>{{ single_product.description | safe }}
+                </span>
+            </form>
         </div>
-        
+
     </div>
-    
+
 </section>
 
 

@@ -2,8 +2,10 @@ from distutils.command.upload import upload
 from django.db import models
 from datetime import datetime
 from ckeditor.fields import RichTextField
+# from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model 
 
-
+User = get_user_model()
 # Create your models here.
 class Product(models.Model):
     product_title = models.CharField(max_length=255)
@@ -21,3 +23,18 @@ class Product(models.Model):
 
     def __str__(self):
         return self.product_title
+
+class Orders(models.Model):
+    STATUS =(
+        ('Pending','Pending'),
+        ('Order Confirmed','Order Confirmed'),
+        ('Out for Delivery','Out for Delivery'),
+        ('Delivered','Delivered'),
+    )
+    customer=models.ForeignKey(User, on_delete=models.CASCADE,null=True)
+    product=models.ForeignKey('Product',on_delete=models.CASCADE,null=True)
+    email = models.CharField(max_length=50,null=True)
+    address = models.CharField(max_length=500,null=True)
+    mobile = models.CharField(max_length=20,null=True)
+    order_date= models.DateField(auto_now_add=True,null=True)
+    status=models.CharField(max_length=50,null=True,choices=STATUS)
