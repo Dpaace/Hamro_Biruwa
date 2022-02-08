@@ -1,7 +1,7 @@
 import imp
 from django.shortcuts import get_object_or_404, redirect, render
 from product import forms,models
-from .models import Product
+from .models import Product, ReviewRating
 from Hamro.models import Blog
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.contrib import messages, auth
@@ -10,6 +10,7 @@ from django.contrib import messages, auth
 from django.contrib.auth import get_user_model 
 from django.contrib.auth.decorators import login_required
 User = get_user_model()
+from .forms import ReviewForm
 
 # Create your views here.
 def product(request):
@@ -244,7 +245,28 @@ def payment_success_view(request, user_id):
     response.delete_cookie('address')
     return response
 
+def submit_review(request, product_ids):
+    url =request.META.get('HTTP_REFERER')
+    if request.method =="POST":
+        try:
+            reviews=ReviewRating.objects.get(id=request.user.id,product__id=product_ids)
+            form =ReviewForm(request.POST,instance=reviews)
+            form.save()
+            messages.success(request, 'Thankyou! Your review has been updated.')
+            return redirect(url)
 
+        except ReviewRating.DoesNotExist:
+            form =ReviewForm(request.POST)
+            if form.is_valid():
+                data=ReviewRating()
+                data.subject=form.cleaned_data['subject']
+                data.review=form.cleaned_data['review']
+                data.ip=request.META.get('REMOTE_ADDR')
+                data.product_ids=product_ids
+                data.user_id =request.user.id
+                data.save()
+                messages.success(request, 'Thankyou! Your review has been submited.')
+                return redirect(url)
 
 
 

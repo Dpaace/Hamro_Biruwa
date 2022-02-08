@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Product, Orders
+from .models import Product, Orders, ReviewRating
 from django.utils.html import format_html
 
 # Register your models here.
@@ -26,5 +26,5 @@ class OrderAdmin(admin.ModelAdmin):
 admin.site.register(Orders, OrderAdmin)
 
 
-
+admin.site.register(ReviewRating)
 
