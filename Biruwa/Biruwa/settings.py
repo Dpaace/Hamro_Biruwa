@@ -83,7 +83,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'biruwa_db',
         'USER': 'postgres',
-        'PASSWORD': 'root7',
+        'PASSWORD': 'ronish123',
         'HOST': 'localhost',
     }
 }
