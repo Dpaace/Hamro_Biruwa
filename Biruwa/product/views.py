@@ -138,13 +138,11 @@ def remove_from_cart_view(request,pk):
 
 # For Searching Products
 def search(request):
+
     product = Product.objects.order_by('-created_date')
-    blog = Blog.objects.order_by('-created_date')
-
     product_search = Product.objects.values_list('product_title', flat=True).distinct()
-    blog_search = Blog.objects.values_list('blog_title', flat=True).distinct()
 
-    
+    # description__icontains
     if 'keyword' in request.GET:
         keyword = request.GET['keyword']
         if keyword:
@@ -155,19 +153,15 @@ def search(request):
         if product_title:
             product = product.filter(model__iexact=product_title)
     
-    if 'blog_title' in request.GET:
-        blog_title = request.GET['blog_title']
-        if Blog.objects.order_by('-created_date'):
-            blog = blog.filter(model__iexact=blog_title)
+
 
     data = {
         'product': product,
-        'product_search': product_search,
-        'blog_search':blog_search,
-        
+        'product_search': product_search, 
     }
     return render(request, 'product/search.html', data)
 
+@login_required(login_url='Hamro:login')
 def customer_address_view(request):
     product_in_cart=False
     if 'product_ids' in request.COOKIES:
@@ -249,7 +243,7 @@ def submit_review(request, product_ids):
     url =request.META.get('HTTP_REFERER')
     if request.method =="POST":
         try:
-            reviews=ReviewRating.objects.get(id=request.user.id,product__id=product_ids)
+            reviews=ReviewRating.objects.get(id=request.user.id, product__id=product_ids)
             form =ReviewForm(request.POST,instance=reviews)
             form.save()
             messages.success(request, 'Thankyou! Your review has been updated.')
@@ -265,7 +259,7 @@ def submit_review(request, product_ids):
                 data.product_ids=product_ids
                 data.user_id =request.user.id
                 data.save()
-                messages.success(request, 'Thankyou! Your review has been submited.')
+                # messages.success(request, 'Thankyou! Your review has been submited.')
                 return redirect(url)
 
 
