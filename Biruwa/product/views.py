@@ -1,15 +1,16 @@
 import imp
 from django.shortcuts import get_object_or_404, redirect, render
 from product import forms,models
-from .models import Product
+from .models import Product, ReviewRating
 from Hamro.models import Blog
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.contrib import messages, auth
-from django.contrib.auth.models import User
-from Hamro import forms
-from django.contrib.auth import  get_user_model 
-
+# from django.contrib.auth.models import User
+# from Hamro import forms
+from django.contrib.auth import get_user_model 
+from django.contrib.auth.decorators import login_required
 User = get_user_model()
+from .forms import ReviewForm
 
 # Create your views here.
 def product(request):
@@ -31,8 +32,8 @@ def product_detail(request, id):
 
     return render(request, 'product/product_detail.html', data)
 
-# def cart(request):
-#     return render(request, 'product/cart.html')
+
+
 
 def add_to_cart_view(request, pk):
     products = models.Product.objects.all()
@@ -45,9 +46,12 @@ def add_to_cart_view(request, pk):
         
     else:
         product_count_in_cart=1
-
+    data= {
+        'products':products,
+        'product_count_in_cart':product_count_in_cart
+    }
     
-    response = render(request, 'product/product.html',{'products':products,'product_count_in_cart':product_count_in_cart})
+    response = render(request, 'product/product.html', data)
     
     # adding product id to cookies
     if 'product_ids' in request.COOKIES:
@@ -70,7 +74,7 @@ def add_to_cart_view(request, pk):
     
     
 
-# for checkout of cart
+# # for checkout of cart
 def cart_view(request):
     #for cart counter
     if 'product_ids' in request.COOKIES:
@@ -88,9 +92,14 @@ def cart_view(request):
         if product_ids != "":
             product_id_in_cart=product_ids.split('|')
             products=models.Product.objects.all().filter(id__in = product_id_in_cart)
-
+        
+    data = {
+        'products':products,
+        'total':total,
+        'product_count_in_cart':product_count_in_cart
+    }
     
-    return render(request,'product/cart.html', {'products':products,'total':total,'product_count_in_cart':product_count_in_cart})
+    return render(request,'product/cart.html', data)
 
 def remove_from_cart_view(request,pk):
     #for counter in cart
@@ -226,7 +235,7 @@ def payment_success_view(request, user_id):
     # suppose if we have 5 items in cart and we place order....so 5 rows will be created in orders table
     # there will be lot of redundant data in orders table...but its become more complicated if we normalize it
     for product in products:
-        models.Orders.objects.get_or_create(user=user,product=product,status='Pending',email=email,mobile=mobile,address=address)
+        models.Orders.objects.get_or_create(customer=user,product=product,status='Pending',email=email,mobile=mobile,address=address)
 
     # after order placed cookies should be deleted
     response = render(request,'product/payment_success.html')
@@ -236,3 +245,105 @@ def payment_success_view(request, user_id):
     response.delete_cookie('address')
     return response
 
+def submit_review(request, product_ids):
+    url =request.META.get('HTTP_REFERER')
+    if request.method =="POST":
+        try:
+            reviews=ReviewRating.objects.get(id=request.user.id,product__id=product_ids)
+            form =ReviewForm(request.POST,instance=reviews)
+            form.save()
+            messages.success(request, 'Thankyou! Your review has been updated.')
+            return redirect(url)
+
+        except ReviewRating.DoesNotExist:
+            form =ReviewForm(request.POST)
+            if form.is_valid():
+                data=ReviewRating()
+                data.subject=form.cleaned_data['subject']
+                data.review=form.cleaned_data['review']
+                data.ip=request.META.get('REMOTE_ADDR')
+                data.product_ids=product_ids
+                data.user_id =request.user.id
+                data.save()
+                messages.success(request, 'Thankyou! Your review has been submited.')
+                return redirect(url)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# New Cart 
+# def _cart_id(request):
+#     cart_id = request.session.session_key
+#     if not cart_id:
+#         cart_id = request.session.create()
+#     return cart_id
+    
+# @login_required(login_url='login')
+# def add_cart(request, product_id):
+#     current_user = request.user
+#     product = Product.objects.get(id=product_id)
+
+#     if request.method == "POST":
+#         # for item in request.POST:
+#         #     key = item
+#         #     value = request.POST[key]
+
+#         product = Product.objects.get(id=product_id)
+#         try:
+#             cart = Cart.objects.get(cart_id=_cart_id(request))
+#         except Cart.DoesNotExist:
+#             cart = Cart.objects.create(cart_id=_cart_id(request))
+#         cart.save()
+
+#         is_cart_item_exists = CartItem.objects.filter(product=product, cart=cart).exists()
+#         if is_cart_item_exists:
+#             messages.success(request, "Item Already In Cart")
+#             return redirect('product')
+            
+#             # cart_item = CartItem.objects.get()
+#             # cart_item.quantity += 1
+#             # cart_item.save()
+#         else:
+#             cart_item = CartItem.objects.create(
+#                 product=product,
+#                 cart=cart,
+#                 user=current_user,
+#             )
+#             cart_item.save()
+#             messages.success(request, "Item Added In Cart")
+
+#         return redirect('product')
+
+# def cart(request, total=0.0, quantity=0, cart_items=None):
+#     try:
+#         if request.user.is_authenticated:
+#             cart_items = CartItem.objects.all().filter(user=request.user)
+#         else:
+#             cart = Cart.objects.get(cart_id=_cart_id(request))
+#             cart_items = CartItem.objects.all().filter(cart=cart, is_active=True)
+#     except:
+#         # print("except")
+#         pass
+
+#     context = {
+#         "cart_items": cart_items,
+#     }
+
+#     return render(request, 'product/cart.html', context)
+
+
+# def remove_cart_item(request, cart_item_id):
+#     cart_item = CartItem.objects.get(id=cart_item_id)
+#     cart_item.delete()
+#     messages.success(request, "Item Sucessfully Removed")
+#     return redirect('cart')

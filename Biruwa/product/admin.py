@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Product
+from .models import Product, Orders, ReviewRating
 from django.utils.html import format_html
 
 # Register your models here.
@@ -10,10 +10,21 @@ class ProductAdmin(admin.ModelAdmin):
 
     thumbnail.short_description = 'Product_Image'
 
-    list_display = ('id','thumbnail','product_title', 'price', 'is_featured', 'is_material')
+    list_display = ('id','thumbnail','product_title', 'price', 'is_featured', 'is_material','is_medicine')
     list_display_links = ('id', 'thumbnail', 'product_title')
-    list_editable = ('is_featured', 'is_material')
+    list_editable = ('is_featured', 'is_material','is_medicine')
     search_fields = ('product_title',)
     list_filter = ('product_title', 'price')
 
 admin.site.register(Product, ProductAdmin)
+
+
+class OrderAdmin(admin.ModelAdmin):
+    pass
+
+
+admin.site.register(Orders, OrderAdmin)
+
+
+admin.site.register(ReviewRating)
+

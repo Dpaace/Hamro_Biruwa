@@ -13,4 +13,8 @@ urlpatterns = [
 
     path('customer-address', views.customer_address_view, name='customer-address'),
     path('payment-success/<int:user_id>', views.payment_success_view,name='payment-success'),
+    path('submit_review/<int:product_ids>', views.submit_review, name='submit_review'),
+    # path('cart', views.cart, name='cart'),
+    # path('add-to-cart/<int:product_id>/', views.add_cart, name="add-to-cart"),
+    # path('remove_item/<int:cart_item_id>/', views.remove_cart_item, name="remove_item"),
 ]

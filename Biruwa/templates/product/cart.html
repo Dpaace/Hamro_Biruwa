@@ -5,6 +5,7 @@
 
 <div class="container mt-5 pt-5">
    <h2 class="mb-5 text-center">Shopping Cart</h2>
+   {% include 'includes/messages.html' %}
    <div class="row justify-content-center">
       <div class="col-md-12">
          <div class="table-responsive">
@@ -34,7 +35,7 @@
                      <td>
                         <p>{{ p.product_title }}</p>
                         <br>
-                        <a href="{% url 'remove-from-cart' p.id  %}">
+                        <a href="{% url 'remove-from-cart' p.id %}">
                            <i class="fas fa-trash-alt"></i>
                         </a>
                         

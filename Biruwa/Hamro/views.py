@@ -5,11 +5,12 @@ from django.contrib import messages
 from django.contrib.auth import  authenticate , get_user_model , logout, login
 from django.contrib.auth.models import auth, User
 from . import forms, models
-from Hamro.models import Gallery, News, Blog
+from Hamro.models import Gallery, News, Blog, Brand
 from django.core.paginator import Paginator
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.decorators import login_required
 from . import models
+
 
 # from product import models
 from Hamro.forms import UserResgistrationForm
@@ -36,10 +37,14 @@ def home(request):
     # For showing featured Products
     featured_product = Product.objects.order_by('-created_date').filter(is_featured=True)
     material_product = Product.objects.order_by('-created_date').filter(is_material=True)
+    medicine_product = Product.objects.order_by('-created_date').filter(is_medicine=True)
+    brand_photo = Brand.objects.all()
     data = {
         'featured_product': featured_product,
-        'material_product':material_product,
-    }
+        'material_product': material_product,
+        'medicine_product': medicine_product,
+        'brand_photo': brand_photo,
+        }
     return render(request, 'pages/home.html',data)
 
 def register(request):
@@ -91,6 +96,12 @@ def login_fn(request):
 
 def about(request):
     return render(request, 'pages/about.html')
+
+def help(request):
+    return render(request, 'pages/help.html')
+
+def discussion(request):
+    return render(request, 'pages/discussion.html')
 
 def contact(request):
     if request.method == "POST":
@@ -151,6 +162,7 @@ def news(request):
 
 def logout(request):
     auth.logout(request)
+    # messages.success(request, "Sucessfully Logged Out")
     return redirect('Hamro:home')
 
 
@@ -212,3 +224,5 @@ def edit_profile_view(request):
             return HttpResponseRedirect('dashboard')
 
     return render(request,'pages/edit_profile.html',context=mydict)
+
+
