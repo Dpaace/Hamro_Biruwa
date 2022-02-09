@@ -11,6 +11,7 @@ from django.shortcuts import get_object_or_404
 from django.contrib.auth.decorators import login_required
 from . import models
 
+
 # from product import models
 from Hamro.forms import UserResgistrationForm
 from django.core.mail import send_mail
@@ -223,3 +224,5 @@ def edit_profile_view(request):
             return HttpResponseRedirect('dashboard')
 
     return render(request,'pages/edit_profile.html',context=mydict)
+
+

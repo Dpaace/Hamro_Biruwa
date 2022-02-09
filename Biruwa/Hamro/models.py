@@ -4,6 +4,7 @@ from django.db import models
 from django.contrib.auth import get_user_model
 from ckeditor.fields import RichTextField
 
+
 from django.contrib.auth.models import AbstractUser
 
 # Create your models here.
@@ -40,3 +41,5 @@ class News(models.Model):
     news_title_1 = models.CharField(max_length=100, default='SOME STRING')
     description = RichTextField()
     created_date = models.DateTimeField(default=datetime.now, blank=True)
+
+
