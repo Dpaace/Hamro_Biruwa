@@ -17,8 +17,13 @@
                 <h5 class="p-name">{{ prod.product_title }}</h5>
             </a>
             <h4 class="p-price">Rs {{ prod.price }}</h4>
+            <h5 class="sm-title">{{ prod.available }} </h5>
             <a href="{% url 'add-to-cart' prod.id  %}">
-                <button class="buy-btn">Add to Cart</button>
+                {% if prod.available == 'In Stock' %}
+                <button type="submit" class="buy-btn">Add to Cart</button>
+                {% else %}
+                <button disabled type="submit" class="buy-btn">Add to Cart</button>
+                {% endif %}
             </a>
         </div>
         {% endfor %}

@@ -174,7 +174,11 @@
             <!-- <a href="{% url 'add-to-cart' fproduct.id  %}"> -->
             <form action="{% url 'add-to-cart' fproduct.id  %}" method="POST">
                 {% csrf_token %}
-                <button type="submit" class="buy-btn">Add To Cart</button>
+                {% if fproduct.available == 'In Stock' %}
+                <button type="submit" class="buy-btn">Add to Cart</button>
+                {% else %}
+                <button disabled type="submit" class="buy-btn">Add to Cart</button>
+                {% endif %}
             </form>
             <!-- </a> -->
             <div class="off-info">
@@ -203,7 +207,11 @@
             <h4 class="p-price">Rs {{ mproduct.price }}</h4>
             <form action="{% url 'add-to-cart' mproduct.id  %}" method="POST">
                 {% csrf_token %}
-                <button type="submit" class="buy-btn">Add To Cart</button>
+                {% if mproduct.available == 'In Stock' %}
+                <button type="submit" class="buy-btn">Add to Cart</button>
+                {% else %}
+                <button disabled type="submit" class="buy-btn">Add to Cart</button>
+                {% endif %}
             </form>
             <div class="off-info">
                 <h2 class="sm-title">{{ mproduct.available }}</h2>
@@ -232,7 +240,11 @@
             <h4 class="p-price">Rs {{ mproduct.price }}</h4>
             <form action="{% url 'add-to-cart' mproduct.id  %}" method="POST">
                 {% csrf_token %}
-                <button type="submit" class="buy-btn">Add To Cart</button>
+                {% if mproduct.available == 'In Stock' %}
+                <button type="submit" class="buy-btn">Add to Cart</button>
+                {% else %}
+                <button disabled type="submit" class="buy-btn">Add to Cart</button>
+                {% endif %}
             </form>
             <div class="off-info">
                 <h2 class="sm-title">{{ mproduct.available }}</h2>
