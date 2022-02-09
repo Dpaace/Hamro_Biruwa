@@ -10,9 +10,9 @@ class ProductAdmin(admin.ModelAdmin):
 
     thumbnail.short_description = 'Product_Image'
 
-    list_display = ('id','thumbnail','product_title', 'price', 'is_featured', 'is_material','is_medicine')
+    list_display = ('id','thumbnail','product_title', 'price', 'is_featured', 'is_material','is_medicine','available')
     list_display_links = ('id', 'thumbnail', 'product_title')
-    list_editable = ('is_featured', 'is_material','is_medicine')
+    list_editable = ('is_featured', 'is_material','is_medicine','available')
     search_fields = ('product_title',)
     list_filter = ('product_title', 'price')
 

@@ -177,6 +177,9 @@
                 <button type="submit" class="buy-btn">Add To Cart</button>
             </form>
             <!-- </a> -->
+            <div class="off-info">
+                <h2 class="sm-title">{{ fproduct.available }}</h2>
+            </div>
         </div>
         {% endfor %}
     </div>
@@ -202,6 +205,9 @@
                 {% csrf_token %}
                 <button type="submit" class="buy-btn">Add To Cart</button>
             </form>
+            <div class="off-info">
+                <h2 class="sm-title">{{ mproduct.available }}</h2>
+            </div>
         </div>
         {% endfor %}
 
@@ -228,6 +234,9 @@
                 {% csrf_token %}
                 <button type="submit" class="buy-btn">Add To Cart</button>
             </form>
+            <div class="off-info">
+                <h2 class="sm-title">{{ mproduct.available }}</h2>
+            </div>
         </div>
         {% endfor %}
 
@@ -238,7 +247,7 @@
     <div class="container">
         <form action="{% url 'product' %}">
             <h4>MID SEASON'S SALE</h4>
-            <h1>Autumn Collection<br>UP TP 20% OFF</h1>
+            <h1>Autumn Collection<br>UP TO 20% OFF</h1>
             <button class="text-uppercase">Shop Now</button>
         </form>
     </div>
