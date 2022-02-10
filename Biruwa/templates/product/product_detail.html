@@ -35,12 +35,11 @@
         </div>
         <div class="col-lg-6 col-md-12 col-12">
 
-            
+
             <h6><a href="{% url 'Hamro:home' %}">Home</a> / Seeds</h6>
             <h3 class="py-4">{{ single_product.product_title }}</h3>
             <h2>Rs {{ single_product.price }}</h2>
-            <h5>Enter Quantity</h5>
-            <input type="number" value="1" min="1" style="width: 7em">
+            <h2>{{ single_product.available }}</h2>
             <a href="{% url 'add-to-cart' single_product.id  %}">
                 <button class="buy-btn">Add To Cart</button>
             </a>
@@ -49,9 +48,9 @@
             </span>
         </div>
 
-       
 
-         <form action="{% url 'submit_review' single_product.id %}" method="POST">
+
+        <form action="{% url 'submit_review' single_product.id %}" method="POST">
             {% csrf_token %}
             <h5>Write your Review</h5>
 
@@ -59,6 +58,8 @@
             <input type="text" class="form-control" style="width:15rem; position: relative; right: 45px;" name="subject"
                 required>
             <br>
+            
+            <!-- <input type="hidden" name="product" value="{{single_product.product_title}}"> -->
             Review:
             <textarea name="review" class="form-control" id="" rows="4" required></textarea>
             <br>
@@ -68,25 +69,9 @@
             {% else %}
 
             <p>You must be logged in to post a review.n<span> <a href="{% url 'Hamro:login' %}">Login Now</a></span></p>
-              {% endif %}
-            <!-- {% if user %}
-            <section>
-            <h2 style="text-align: center;">
-                Thanks {{user}}!
-            </h2>
-    
-            <p style="text-align: center;">
-                thankyou for your review
-            </p>
-            </section>
-            {% else %} -->
-           
+            {% endif %}
+            
         </form>
-
     </div>
-
 </section>
-
-
-{% endif %}
 {% endblock %}
