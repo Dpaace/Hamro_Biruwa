@@ -174,9 +174,16 @@
             <!-- <a href="{% url 'add-to-cart' fproduct.id  %}"> -->
             <form action="{% url 'add-to-cart' fproduct.id  %}" method="POST">
                 {% csrf_token %}
-                <button type="submit" class="buy-btn">Add To Cart</button>
+                {% if fproduct.available == 'In Stock' %}
+                <button type="submit" class="buy-btn">Add to Cart</button>
+                {% else %}
+                <button disabled type="submit" class="buy-btn">Add to Cart</button>
+                {% endif %}
             </form>
             <!-- </a> -->
+            <div class="off-info">
+                <h2 class="sm-title">{{ fproduct.available }}</h2>
+            </div>
         </div>
         {% endfor %}
     </div>
@@ -200,8 +207,15 @@
             <h4 class="p-price">Rs {{ mproduct.price }}</h4>
             <form action="{% url 'add-to-cart' mproduct.id  %}" method="POST">
                 {% csrf_token %}
-                <button type="submit" class="buy-btn">Add To Cart</button>
+                {% if mproduct.available == 'In Stock' %}
+                <button type="submit" class="buy-btn">Add to Cart</button>
+                {% else %}
+                <button disabled type="submit" class="buy-btn">Add to Cart</button>
+                {% endif %}
             </form>
+            <div class="off-info">
+                <h2 class="sm-title">{{ mproduct.available }}</h2>
+            </div>
         </div>
         {% endfor %}
 
@@ -226,8 +240,15 @@
             <h4 class="p-price">Rs {{ mproduct.price }}</h4>
             <form action="{% url 'add-to-cart' mproduct.id  %}" method="POST">
                 {% csrf_token %}
-                <button type="submit" class="buy-btn">Add To Cart</button>
+                {% if mproduct.available == 'In Stock' %}
+                <button type="submit" class="buy-btn">Add to Cart</button>
+                {% else %}
+                <button disabled type="submit" class="buy-btn">Add to Cart</button>
+                {% endif %}
             </form>
+            <div class="off-info">
+                <h2 class="sm-title">{{ mproduct.available }}</h2>
+            </div>
         </div>
         {% endfor %}
 
@@ -238,7 +259,7 @@
     <div class="container">
         <form action="{% url 'product' %}">
             <h4>MID SEASON'S SALE</h4>
-            <h1>Autumn Collection<br>UP TP 20% OFF</h1>
+            <h1>Autumn Collection<br>UP TO 20% OFF</h1>
             <button class="text-uppercase">Shop Now</button>
         </form>
     </div>
