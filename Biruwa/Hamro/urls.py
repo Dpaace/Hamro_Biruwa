@@ -26,4 +26,5 @@ urlpatterns = [
     
     # User Related Views
     path('edit-profile', views.edit_profile_view,name='edit-profile'),
+    path('myorder', views.myorder_view,name='myorder'),
 ]

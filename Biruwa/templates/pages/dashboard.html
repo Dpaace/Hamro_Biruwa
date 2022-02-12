@@ -44,6 +44,7 @@
         </div>
         <div class="panel-footer">
           <a href="{% url 'Hamro:edit-profile' %}"  type="button" class="btn btn-sm btn-primary" style="margin-top: 30px;"> Edit My Profile</a>
+          <a href="{% url 'Hamro:myorder' %}"  type="button" class="btn btn-sm btn-info" style="margin-top: 30px;"> View My Orders</a>
           <a class="btn btn-sm btn-danger" href="/deleteuser/{{ request.user.id }}" style="margin-left: 30px; margin-top: 30px;">Delete</a>
         </div>
         
