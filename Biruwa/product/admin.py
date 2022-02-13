@@ -20,7 +20,16 @@ admin.site.register(Product, ProductAdmin)
 
 
 class OrderAdmin(admin.ModelAdmin):
-    pass
+    def thumbnail(self, object):
+        return format_html('<img src="{}" width="40" style="border-radius:50px;"/>'.format(object.product.product_photo.url))
+
+    thumbnail.short_description = 'Product_Image'
+
+    list_display = ('id','thumbnail','customer', 'product', 'email', 'address','mobile','order_date','status')
+    list_display_links = ('id', 'thumbnail')
+    list_editable = ('status',)
+    search_fields = ('customer',)
+    list_filter = ('email', 'mobile')
 
 
 admin.site.register(Orders, OrderAdmin)
