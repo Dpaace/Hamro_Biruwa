@@ -7,13 +7,12 @@ from django.contrib.auth import get_user_model
 
 User = get_user_model()
 # Create your models here.
+
+
 class Product(models.Model):
     available_choice = (
-
         ('In Stock', 'In Stock'),
-
         ('Out Of Stock', 'Out Of Stock'),
-
     )
 
     product_title = models.CharField(max_length=255)
