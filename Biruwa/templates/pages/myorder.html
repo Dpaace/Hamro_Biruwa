@@ -1,25 +1,57 @@
-<h1>This is the orders page</h1>
+{% extends 'base.html' %}
 
-<table class="table table-hover" id="dev-table">
-    <thead>
-        <tr>
-            <th>Product Name</th>
-            <th>Image</th>
-            <th>Price</th>
-            <th>Ordered Date</th>
-            <th>Status</th>
-        </tr>
-    </thead>
-    {% for od in order %}
-    {% if request.user.id == od.customer.id %}
-    <tr>
-        <td>{{ od.product.product_title }}</td>
-        <td> <img src="{{ od.product.product_photo.url }}" alt="Profile Pic" height="30px" width="40px" /></td>
-        <td>{{ od.product.price }}</td>
-        <td>{{ od.order_date }}</td>
-        <td>{{ od.status }}</td>
-    </tr>
-    {% endif %}
-    {% endfor %} 
-    <a href="{% url 'Hamro:home' %}">Goto HOME!</a>
-</table>    
+{% block content %}
+ 
+{% load static %}
+
+<div class="container mt-5 pt-5">
+  <h2 class="mb-5 text-center" style="margin-top:100px;">Order Page</h2>
+  <div class="row justify-content-center">
+    <div class="col-md-12">
+      <div class="table-responsive">
+        <table class="table table-hover" id="dev-table">
+          <thead>
+            <tr>
+              <th>Product Name</th>
+              <th>Image</th>
+              <th>Price</th>
+              <th>Ordered Date</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          {% for od in order %} {% if request.user.id == od.customer.id %}
+          <tr>
+            <td>{{ od.product.product_title }}</td>
+            <td>
+              <img
+                src="{{ od.product.product_photo.url }}"
+                alt="Profile Pic"
+                height="30px"
+                width="40px"
+              />
+            </td>
+            <td>{{ od.product.price }}</td>
+            <td>{{ od.order_date }}</td>
+            <td style="background-color: rgb(0, 132, 255); color:white">{{ od.status }}</td>
+          </tr>
+          {% endif %} {% endfor %}
+        </table>
+      </div>
+     
+    </div>
+  </div>
+  <a style="background: gray;
+  font-family: 'Cairo', sans-serif;
+  color: #000;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 12px 50px;
+  float:right;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;"  href="{% url 'Hamro:home' %}">Go to HOME</a>
+</div>
+<br><br><br><br>
+
+{% endblock %}
