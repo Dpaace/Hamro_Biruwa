@@ -1,7 +1,7 @@
 from django.urls import reverse,resolve
 from django.test import Client, SimpleTestCase, TestCase
 from product.views import product, product_detail, search, add_to_cart_view, cart_view
-from product.views import remove_from_cart_view,customer_address_view, payment_success_view
+from product.views import remove_from_cart_view,customer_address_view, payment_success_view, submit_review
 from django.contrib.auth.models import User
 from django.contrib.auth import get_user_model
 
@@ -17,7 +17,7 @@ class TestUrls(SimpleTestCase):
         self.assertEquals(resolve(url).func,product)
 
     def test_case_product_detail_url(self):
-        url=reverse("product_detail")
+        url=reverse("product_detail", args=[1])
         print(resolve(url))
         self.assertEquals(resolve(url).func,product_detail)
 
@@ -27,7 +27,7 @@ class TestUrls(SimpleTestCase):
         self.assertEquals(resolve(url).func,search)
 
     def test_case_add_to_cart_url(self):
-        url=reverse("add-to-cart")
+        url=reverse("add-to-cart" , args=[1])
         print(resolve(url))
         self.assertEquals(resolve(url).func,add_to_cart_view)
 
@@ -37,7 +37,7 @@ class TestUrls(SimpleTestCase):
         self.assertEquals(resolve(url).func,cart_view)
 
     def test_case_remove_from_cart_url(self):
-        url=reverse("remove-from-cart")
+        url=reverse("remove-from-cart" , args=[1])
         print(resolve(url))
         self.assertEquals(resolve(url).func,remove_from_cart_view)
 
@@ -47,9 +47,14 @@ class TestUrls(SimpleTestCase):
         self.assertEquals(resolve(url).func,customer_address_view)
 
     def test_case_payment_url(self):
-        url=reverse("payment-success")
+        url=reverse("payment-success" , args=[1])
         print(resolve(url))
         self.assertEquals(resolve(url).func,payment_success_view)
+
+    def test_case_submit_review_url(self):
+        url=reverse("submit_review" , args=[1])
+        print(resolve(url))
+        self.assertEquals(resolve(url).func,submit_review)
     
 
     
