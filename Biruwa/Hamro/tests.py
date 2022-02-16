@@ -41,20 +41,20 @@ class TestUrls(SimpleTestCase):
         print(resolve(url))
         self.assertEquals(resolve(url).func,blog)
 
-    # def test_case_blog_detail_url(self):
-    #     url=reverse("Hamro:blog_detail")
-    #     print(resolve(url))
-    #     self.assertEquals(resolve(url).func,blog_detail)
+    def test_case_blog_detail_url(self):
+        url=reverse("Hamro:blog_detail", args=[1])
+        print(resolve(url))
+        self.assertEquals(resolve(url).func,blog_detail)
 
     def test_case_news_url(self):
         url=reverse("Hamro:news")
         print(resolve(url))
         self.assertEquals(resolve(url).func,news)
 
-    # def test_case_delete_user_url(self):
-    #     url=reverse("Hamro:delete_user")
-    #     print(resolve(url))
-    #     self.assertEquals(resolve(url).func,delete_user)
+    def test_case_delete_user_url(self):
+        url=reverse("Hamro:delete_user", args=[1])
+        print(resolve(url))
+        self.assertEquals(resolve(url).func,delete_user)
 
     def test_case_logout_url(self):
         url=reverse("Hamro:logout")
