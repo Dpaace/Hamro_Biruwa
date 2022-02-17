@@ -14,7 +14,7 @@
     {% for prod in blog %}
     <div class="product text-center">
       <a href="{% url 'Hamro:blog_detail' prod.id %}">
-        <img class="img-fluid mb-3" src="{{ prod.blog_photo.url }}" alt="">
+        <img class="img-fluid mb-3" style="width: 300px; height: 250px;" src="{{ prod.blog_photo.url }}" alt="">
       </a>
       <a href="{% url 'Hamro:blog_detail' prod.id %}">
         <h5 class="p-name">{{ prod.blog_title }}</h5>

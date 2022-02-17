@@ -11,7 +11,7 @@ body{
     height: 100vh;
     justify-content: center;
     align-items: center;
-    background: linear-gradient(135deg, #71b7e6, #9b59b6);
+    background: linear-gradient(135deg, #71e6c2, #0a921c);
 }
 
 .container{
@@ -35,7 +35,7 @@ body{
     bottom: 0;
     height:  3px;
     width: 30px;
-    background: linear-gradient(135deg, #71b7e6, #9b59b6);
+    background: linear-gradient(135deg, #71e6c2, #0a921c);
 }
 
 .container form .user-details{
@@ -70,7 +70,7 @@ form .user-details .input-box{
 
 .user-details .input-box input:focus,
 .user-details .input-box input:valid{
-    border-color: #9b59b6;
+    border-color: #71e6c2;
 }
 
 form .terms .check-tick{
@@ -102,11 +102,11 @@ form .button input{
     font-weight: 500;
     border-radius: 5px;
     letter-spacing: 1px;
-    background: linear-gradient(135deg, #71b7e6, #9b59b6);
+    background: linear-gradient(135deg, #71e6c2, #0a921c);
 }
 
 form .button input:hover{
-    background: linear-gradient(-135deg, #71b7e6, #9b59b6);
+    background: linear-gradient(-135deg, #71e6c2, #0a921c);
 }
 
 @media(max-width:585px ){

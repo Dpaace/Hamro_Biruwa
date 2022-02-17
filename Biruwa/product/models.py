@@ -7,10 +7,18 @@ from django.contrib.auth import get_user_model
 
 User = get_user_model()
 # Create your models here.
+
+
 class Product(models.Model):
+    available_choice = (
+        ('In Stock', 'In Stock'),
+        ('Out Of Stock', 'Out Of Stock'),
+    )
+
     product_title = models.CharField(max_length=255)
     price = models.IntegerField()
     description = RichTextField()
+    available = models.CharField(choices=available_choice, max_length=40, default='In Stock')
     product_photo = models.ImageField(upload_to='photos/%Y/%m/%d/')
     product_photo_1 = models.ImageField(upload_to='photos/%Y/%m/%d/', blank=True)
     product_photo_2 = models.ImageField(upload_to='photos/%Y/%m/%d/', blank=True)

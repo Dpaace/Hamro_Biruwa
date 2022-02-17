@@ -22,8 +22,9 @@ urlpatterns = [
 
     path('deleteuser/<int:user_id>', views.delete_user, name='delete_user'),
 
-    path("password_reset", views.password_reset_request, name="password_reset"),
+    path("password_reset/", views.password_reset_request, name="password_reset"),
     
     # User Related Views
     path('edit-profile', views.edit_profile_view,name='edit-profile'),
+    path('myorder', views.myorder_view,name='myorder'),
 ]

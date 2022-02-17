@@ -90,24 +90,69 @@
 <!-- HOME -->
 <section id="slider">
     <ul class="slider-carousel col-lg-12 col-md-12 col-12" id="slider-carouesel">
-        <li class="img1"></li>
-        <li class="img2"></li>
-        <li class="img3"></li>
-        <li class="img4"></li>
+        <li class="img1">
+            <div class="container mt-5 pt-5">
+                <h3 class="mt-5 pt-5">NEW ARRIVALS</h3>
+                <form action="{% url 'product' %}">
+                <h1><span>Best Price</span> This Year</h1>
+                <p>Welcome to Hamro Biruwa<br>
+                    Nepal's No.1 Website for agricultural products</p>
+                <button type="submit" style="background-color: coral; border-radius: 30px;">Shop Now</button>
+                </form>
+            </div>
+        </li>
+        <li class="img2">
+            <div class="container mt-5 pt-5">
+                <h3 class="mt-5 pt-5">NEW ARRIVALS</h3>
+                <form action="{% url 'product' %}">
+                <h1><span>Best Price</span> This Year</h1>
+                <p>Hamro Biruwa Provides You <br>
+                    Best Quality Materials</p>
+                <button type="submit" style="background-color: coral; border-radius: 30px;">Shop Now</button>
+                </form>
+            </div>
+        </li>
+        <li class="img3">
+            <div class="container mt-5 pt-5">
+                <h3 class="mt-5 pt-5">NEW ARRIVALS</h3>
+                <form action="{% url 'product' %}">
+                <h1><span>Best Price</span> This Year</h1>
+                <p>Hamro Biruwa Provides You <br>
+                    Everything You Need For Farming</p>
+                <button type="submit" style="background-color: coral; border-radius: 30px;">Shop Now</button>
+                </form>
+            </div>
+        </li>
+        <li class="img4">
+            <div class="container mt-5 pt-5">
+                <h3 class="mt-5 pt-5">NEW ARRIVALS</h3>
+                <form action="{% url 'product' %}">
+                <h1><span>Best Price</span> This Year</h1>
+                <p>Hamro Biruwa <br>
+                    The Trusted One</p>
+                <button type="submit" style="background-color: coral; border-radius: 30px;">Shop Now</button>
+                </form>
+            </div>
+        </li>
     </ul>
 </section>
 <!-- <section id="home">
         <div class="container">
             <h5>NEW ARRIVALS</h5>
+            <form action="{% url 'product' %}">
             <h1><span>Best Price</span> This Year</h1>
             <p>Hello everyone this is the killer project <br>
                 Welcome to my world</p>
-            <button>Shop Now</button>
+            <button type="submit">Shop Now</button>
+            </form>
         </div>
     </section> -->
 <!-- BRAND -->
 <section id="brand" class="container-fluid">
-
+    <div class="container text-center mt-5 py-1">
+        <h3>Our Brands</h3>
+        <hr class="mx-auto">
+    </div>
     <div class="row m-0 py-5">
         {% for bp in brand_photo %}
         {% if bp.brand_photo_1 %}
@@ -174,9 +219,16 @@
             <!-- <a href="{% url 'add-to-cart' fproduct.id  %}"> -->
             <form action="{% url 'add-to-cart' fproduct.id  %}" method="POST">
                 {% csrf_token %}
-                <button type="submit" class="buy-btn">Add To Cart</button>
+                {% if fproduct.available == 'In Stock' %}
+                <button type="submit" class="buy-btn">Add to Cart</button>
+                {% else %}
+                <button disabled type="submit" class="buy-btn">Add to Cart</button>
+                {% endif %}
             </form>
             <!-- </a> -->
+            <div class="off-info">
+                <h2 class="sm-title">{{ fproduct.available }}</h2>
+            </div>
         </div>
         {% endfor %}
     </div>
@@ -200,8 +252,15 @@
             <h4 class="p-price">Rs {{ mproduct.price }}</h4>
             <form action="{% url 'add-to-cart' mproduct.id  %}" method="POST">
                 {% csrf_token %}
-                <button type="submit" class="buy-btn">Add To Cart</button>
+                {% if mproduct.available == 'In Stock' %}
+                <button type="submit" class="buy-btn">Add to Cart</button>
+                {% else %}
+                <button disabled type="submit" class="buy-btn">Add to Cart</button>
+                {% endif %}
             </form>
+            <div class="off-info">
+                <h2 class="sm-title">{{ mproduct.available }}</h2>
+            </div>
         </div>
         {% endfor %}
 
@@ -226,8 +285,15 @@
             <h4 class="p-price">Rs {{ mproduct.price }}</h4>
             <form action="{% url 'add-to-cart' mproduct.id  %}" method="POST">
                 {% csrf_token %}
-                <button type="submit" class="buy-btn">Add To Cart</button>
+                {% if mproduct.available == 'In Stock' %}
+                <button type="submit" class="buy-btn">Add to Cart</button>
+                {% else %}
+                <button disabled type="submit" class="buy-btn">Add to Cart</button>
+                {% endif %}
             </form>
+            <div class="off-info">
+                <h2 class="sm-title">{{ mproduct.available }}</h2>
+            </div>
         </div>
         {% endfor %}
 
@@ -238,8 +304,8 @@
     <div class="container">
         <form action="{% url 'product' %}">
             <h4>MID SEASON'S SALE</h4>
-            <h1>Autumn Collection<br>UP TP 20% OFF</h1>
-            <button class="text-uppercase">Shop Now</button>
+            <h1>Autumn Collection<br>UP TO 20% OFF</h1>
+            <button class="text-uppercase" style="border-radius: 30px;">Shop Now</button>
         </form>
     </div>
 </section>

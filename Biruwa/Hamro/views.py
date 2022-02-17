@@ -21,7 +21,7 @@ User = get_user_model()
 #Create your views here.
 
 
-from product.models import Product
+from product.models import Product, Orders
 
 # For reset password
 from django.core.mail import send_mail, BadHeaderError
@@ -125,7 +125,7 @@ def contact(request):
 
 def blog(request):
     blog = Blog.objects.order_by('-created_date')
-    paginator = Paginator(blog, 4)
+    paginator = Paginator(blog, 1)
     page = request.GET.get('page')
     paged_product = paginator.get_page(page)
     data = {
@@ -222,7 +222,14 @@ def edit_profile_view(request):
             # user.set_password(user.password)
             # user.save()
             return HttpResponseRedirect('dashboard')
-
     return render(request,'pages/edit_profile.html',context=mydict)
 
+
+@login_required(login_url='Hamro:login')
+def myorder_view(request):
+    order = Orders.objects.all()
+    data = {
+        'order':order,
+    }
+    return render(request,'pages/myorder.html', data)
 

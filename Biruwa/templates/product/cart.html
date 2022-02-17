@@ -14,11 +14,7 @@
                   <tr>
                      <th>Product</th>
                      <th>Name</th>
-                     <th>Qty</th>
-                     <th>Price</th>
-                     <th class="text-right">
-                        <span id="amount" class="amount1">Amount</span>
-                     </th>
+                     <th class="text-center">Price</th>
                   </tr>
                </thead>
                <tbody>
@@ -41,17 +37,8 @@
                         
                      </td>
                      <td>
-                        <div class="button-container">
-                           <button class="cart-qty-minus" type="button" value="-">-</button>
-                           <input type="text" name="qty" min="1" class="qty form-control" value="1" />
-                           <button class="cart-qty-plus" type="button" value="+">+</button>
-                        </div>
-                     </td>
-                     <td>
                         <input type="text" value="{{ p.price }}" class="price form-control" disabled>
-                     </td>
-                     <td>$ <span id="amount" class="amount">0</span>
-                     </td>
+                  
                   </tr>
                   {%else%}
                   <br><br><br>
@@ -64,10 +51,9 @@
                </tbody>
                <tfoot>
                   <tr>
-                     <td colspan="4"></td>
+                     <td colspan="3"></td>
                      <td>
-                        <strong>TOTAL = $ <span id="total" class="total">0</span>
-                        </strong>
+                        
                      </div>
                      <br><br><br>
                      <div style="text-align: center;">
