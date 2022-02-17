@@ -15,7 +15,7 @@ from .forms import ReviewForm
 # Create your views here.
 def product(request):
     product = Product.objects.order_by('-created_date')
-    paginator = Paginator(product, 4)
+    paginator = Paginator(product, 2)
     page = request.GET.get('page')
     paged_product = paginator.get_page(page)
     data = {
