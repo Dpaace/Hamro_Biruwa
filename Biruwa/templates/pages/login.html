@@ -1,58 +1,64 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-   <head>
-      <meta charset="utf-8">
-      <title>Login</title>
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <link rel="stylesheet" href="{% static 'css/login.css' %}">
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
-   </head>
-   <body>
-      <div class="bg-img">
-         <div class="container">
-            <header>Login to <b><span style="color: rgb(48, 236, 57);">Hamro Biruwa</span></b></header>
-            
-            <form method="post" enctype="multipart/form-data" action="{% url 'Hamro:login' %}">
-               {% csrf_token %}
-               <div class="field">
-                  <span class="fa fa-user"></span>
-                  <input type="text" name="username" required placeholder="username">
-               </div>
-               <div class="field space">
-                  <span class="fa fa-lock"></span>
-                  <input type="password" name="password" class="pass-key" required placeholder="password">
-                  <span class="show">SHOW</span>
-               </div>
-               <div class="pass" style="padding-top: 5px;">
-                  <a href={% url 'Hamro:password_reset' %}>Forgot password?</a>
-               </div>
-               <div class="field">
-                  <input type="submit" style="padding-top: 10px; text-align: center;" value="LOGIN">
-                  <button hidden type="submit">Login</button>
-                  </input>
-               </div>
-            </form>
-            <div class="signup" style="padding-top: 25px;">
-               Don't have account?
-               <a href="/register/">Signup Now</a>
+
+<head>
+   <meta charset="utf-8">
+   <title>Login</title>
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel="stylesheet" href="{% static 'css/login.css' %}">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+</head>
+
+<body>
+           
+   <div class="bg-img">
+      
+      <div class="container">
+         <header>Login to <b><span style="color: rgb(48, 236, 57);">Hamro Biruwa</span></b></header>
+      
+         <form method="post" enctype="multipart/form-data" action="{% url 'Hamro:login' %}">
+            {% csrf_token %}
+            <div class="field">
+               <span class="fa fa-user"></span>
+               <input type="text" name="username" required placeholder="username">
             </div>
+            <div class="field space">
+               <span class="fa fa-lock"></span>
+               <input type="password" name="password" class="pass-key" required placeholder="password">
+               <span class="show">SHOW</span>
+            </div>
+            <div class="pass" style="padding-top: 5px;">
+               <a href={% url 'Hamro:password_reset' %}>Forgot password?</a>
+            </div>
+            <div class="field">
+               <input type="submit" style="padding-top: 10px; text-align: center;" value="LOGIN">
+               <button hidden type="submit">Login</button>
+               </input>
+            </div>
+         </form>
+         <div class="signup" style="padding-top: 25px;">
+            Don't have account?
+            <a href="/register/">Signup Now</a>
+            <center><h2><a href="{% url 'Hamro:home' %}"> Home </a></h2></center>
          </div>
       </div>
-      <script>
-         const pass_field = document.querySelector('.pass-key');
-         const showBtn = document.querySelector('.show');
-         showBtn.addEventListener('click', function(){
-          if(pass_field.type === "password"){
+   </div>
+   <script>
+      const pass_field = document.querySelector('.pass-key');
+      const showBtn = document.querySelector('.show');
+      showBtn.addEventListener('click', function () {
+         if (pass_field.type === "password") {
             pass_field.type = "text";
             showBtn.textContent = "HIDE";
             showBtn.style.color = "#3498db";
-          }else{
+         } else {
             pass_field.type = "password";
             showBtn.textContent = "SHOW";
             showBtn.style.color = "#222";
-          }
-         });
-      </script> 
-   </body>
+         }
+      });
+   </script>
+</body>
+
 </html>

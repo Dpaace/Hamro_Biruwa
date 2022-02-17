@@ -17,9 +17,9 @@
     {% for prod in product %}
     <form action="{% url 'add-to-cart' prod.id  %}" method="POST">
       {% csrf_token %}
-      <div class="product text-center">
+      <div class="container product text-center">
         <a href="{% url 'product_detail' prod.id %}">
-          <img class="img-fluid mb-3" src="{{ prod.product_photo.url }}" alt="">
+          <img style="height: 300px; width: 300px;" class="img-fluid mb-3" src="{{ prod.product_photo.url }}" alt="">
         </a>
         <a href="{% url 'product_detail' prod.id %}">
           <h5 class="p-name">{{ prod.product_title }}</h5>
