@@ -67,9 +67,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{% url 'cart' %}"><i class=3
-                        
-                        "fas fa-shopping-cart"></i></a>
+                    <a href="{% url 'cart' %}"><i class="fas fa-shopping-cart"></i></a>
                 </li>
                 {% if not request.user.is_authenticated %}
                 <a href="{% url 'Hamro:login' %}"><i class="far fa-user"></i></a>
