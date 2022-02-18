@@ -125,7 +125,7 @@ def contact(request):
 
 def blog(request):
     blog = Blog.objects.order_by('-created_date')
-    paginator = Paginator(blog, 4)
+    paginator = Paginator(blog, 1)
     page = request.GET.get('page')
     paged_product = paginator.get_page(page)
     data = {
